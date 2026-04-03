@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architecture Poster Renderer</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --text: #183153;
+      --muted: #5f6b7a;
+      --line: #dbe4f0;
+      --accent: #4f7cff;
+      --accent-soft: #eef3ff;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #eef3fb 0%, #f8fbff 100%);
+      color: var(--text);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 28px;
+    }
+
+    .poster {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(219, 228, 240, 0.8);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding: 28px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 860px;
+    }
+
+    .meta {
+      flex: 0 0 260px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .meta-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7a8aa0;
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(420px, 1fr) 280px;
+      grid-template-areas:
+        "top top top"
+        "left center right"
+        "bottom bottom bottom";
+      gap: 18px;
+    }
+
+    .zone {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .zone::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #7aa2ff 0%, #5dd0ff 100%);
+      opacity: 0.9;
+    }
+
+    .zone-top { grid-area: top; }
+    .zone-left { grid-area: left; }
+    .zone-center { grid-area: center; }
+    .zone-right { grid-area: right; }
+    .zone-bottom { grid-area: bottom; }
+
+    .zone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .zone-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #48617f;
+      text-transform: uppercase;
+    }
+
+    .zone-hint {
+      font-size: 12px;
+      color: #90a0b3;
+    }
+
+    .cards {
+      display: grid;
+      gap: 14px;
+    }
+
+    .zone-top .cards,
+    .zone-bottom .cards {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid #e5ebf3;
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .card.core {
+      background: linear-gradient(180deg, #f5f8ff 0%, #eef4ff 100%);
+      border-color: #cfdcff;
+      box-shadow: 0 16px 30px rgba(79, 124, 255, 0.12);
+    }
+
+    .card-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .card-desc {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--accent-soft);
+      color: #3557bf;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .relations {
+      margin-top: 20px;
+      border-top: 1px dashed var(--line);
+      padding-top: 18px;
+    }
+
+    .relations h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .relations ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .raw {
+      margin-top: 20px;
+      background: #0f172a;
+      color: #d9e3f0;
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      overflow: auto;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "top"
+          "center"
+          "left"
+          "right"
+          "bottom";
+      }
+
+      .hero {
+        flex-direction: column;
+      }
+
+      .meta {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="poster" id="poster"></div>
+  </div>
+
+  <script>
+    const spec = {
+      diagram_type: "architecture-poster",
+      title: "OpenClaw 入门架构图",
+      audience: "产品和运营",
+      goal: "帮助非技术同学快速理解 OpenClaw 的整体组成、触发方式，以及它如何连接模型、记忆、技能与执行工具。",
+      layout: "core-with-surroundings",
+      style_keywords: ["PPT", "卡片式", "正式", "清爽", "低线条"],
+      assumptions: [
+        "这是一张入门摘要图，不展开底层技术实现。",
+        "重点是帮助非技术同学建立整体心智模型，而不是解释协议和代码细节。"
+      ],
+      zones: {
+        top: [
+          {
+            title: "使用者",
+            description: "最先接触 OpenClaw 的业务角色。",
+            items: ["产品", "运营", "分析同学"]
+          },
+          {
+            title: "交互入口",
+            description: "用户通常通过聊天、网页或自动化任务发起请求。",
+            items: ["IM / Chat", "Web 界面", "定时任务"]
+          }
+        ],
+        left: [
+          {
+            title: "触发与编排",
+            description: "决定何时开始执行以及按什么步骤推进。",
+            items: ["任务触发", "上下文注入", "步骤编排", "结果回传"]
+          }
+        ],
+        center: [
+          {
+            title: "OpenClaw 核心",
+            description: "负责理解任务、选择能力、组织执行，是整套系统的中枢。",
+            items: ["任务理解", "Agent 调度", "Skill 选择", "工具调用"],
+            core: true
+          }
+        ],
+        right: [
+          {
+            title: "模型能力",
+            description: "负责推理、生成、总结与决策支持。",
+            items: ["OpenAI", "Anthropic", "本地模型"]
+          },
+          {
+            title: "外部系统",
+            description: "当任务需要真实动作时，会连接企业系统或互联网服务。",
+            items: ["知识库", "业务系统", "网页服务"]
+          }
+        ],
+        bottom: [
+          {
+            title: "Memory",
+            description: "保存长期偏好、历史上下文和阶段性工作记忆。",
+            items: ["SOUL.md", "USER.md", "MEMORY.md"]
+          },
+          {
+            title: "Skills",
+            description: "把复杂任务打包成可复用的方法模块。",
+            items: ["知识整理", "数据分析", "浏览器自动化"]
+          },
+          {
+            title: "Tools",
+            description: "真正执行动作的能力层。",
+            items: ["Shell", "Browser", "API"]
+          }
+        ]
+      },
+      relations: [
+        "用户从交互入口提出需求，OpenClaw 核心负责理解并拆解任务。",
+        "核心会按需调用模型、读取记忆、选择技能，再进一步调用工具执行。",
+        "执行结果会回传给用户，也可能沉淀进记忆或知识模块，供后续任务复用。"
+      ]
+    };
+
+    function createCard(card) {
+      const items = (card.items || []).map(item => `<span class="chip">${item}</span>`).join("");
+      return `
+        <section class="card ${card.core ? "core" : ""}">
+          <h3 class="card-title">${card.title || "未命名模块"}</h3>
+          ${card.description ? `<p class="card-desc">${card.description}</p>` : ""}
+          <div class="chip-list">${items}</div>
+        </section>
+      `;
+    }
+
+    function createZone(zoneKey, cards) {
+      if (!cards || cards.length === 0) return "";
+      const zoneNames = {
+        top: ["Overview", "读图入口"],
+        left: ["Trigger", "触发与上游"],
+        center: ["Core", "核心系统"],
+        right: ["Capability", "模型与外部能力"],
+        bottom: ["Foundation", "基础支撑层"]
+      };
+      const [title, hint] = zoneNames[zoneKey] || [zoneKey, ""];
+      return `
+        <section class="zone zone-${zoneKey}">
+          <div class="zone-header">
+            <div class="zone-title">${title}</div>
+            <div class="zone-hint">${hint}</div>
+          </div>
+          <div class="cards">
+            ${cards.map(createCard).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderPoster(data) {
+      const poster = document.getElementById("poster");
+      poster.innerHTML = `
+        <div class="hero">
+          <div>
+            <h1>${data.title}</h1>
+            <p>${data.goal}</p>
+          </div>
+          <aside class="meta">
+            <div class="meta-label">Audience</div>
+            <div class="meta-value">${data.audience}</div>
+            <div class="meta-label">Layout</div>
+            <div class="meta-value">${data.layout}</div>
+            <div class="meta-label">Style</div>
+            <div class="meta-value">${(data.style_keywords || []).join(" · ")}</div>
+          </aside>
+        </div>
+
+        <div class="layout">
+          ${createZone("top", data.zones?.top)}
+          ${createZone("left", data.zones?.left)}
+          ${createZone("center", data.zones?.center)}
+          ${createZone("right", data.zones?.right)}
+          ${createZone("bottom", data.zones?.bottom)}
+        </div>
+
+        <section class="relations">
+          <h2>读图说明</h2>
+          <ul>
+            ${(data.relations || []).map(text => `<li>${text}</li>`).join("")}
+          </ul>
+        </section>
+
+        <section class="relations">
+          <h2>当前假设</h2>
+          <ul>
+            ${(data.assumptions || []).map(text => `<li>${text}</li>`).join("")}
+          </ul>
+        </section>
+
+        <pre class="raw">${escapeHtml(JSON.stringify(data, null, 2))}</pre>
+      `;
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    renderPoster(spec);
+  </script>
+</body>
+</html>

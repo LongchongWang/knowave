@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenClaw 入门架构图</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --panel-soft: #f8fbff;
+        --text: #17324d;
+        --muted: #607086;
+        --line: #d9e4f2;
+        --accent: #4f7cff;
+        --accent-2: #5dcfff;
+        --accent-soft: #edf3ff;
+        --shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
+        --radius-xl: 28px;
+        --radius-lg: 20px;
+        --radius-md: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          "PingFang SC",
+          sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(93, 207, 255, 0.18),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(79, 124, 255, 0.16),
+            transparent 26%
+          ),
+          linear-gradient(180deg, #eff4fb 0%, #f8fbff 100%);
+        color: var(--text);
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 32px;
+      }
+
+      .poster {
+        max-width: 1480px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(217, 228, 242, 0.92);
+        border-radius: 36px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+        overflow: hidden;
+      }
+
+      .hero {
+        position: relative;
+        padding: 34px 36px 28px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 124, 255, 0.08),
+          rgba(93, 207, 255, 0.08)
+        );
+        border-bottom: 1px solid rgba(217, 228, 242, 0.95);
+      }
+
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        align-items: flex-start;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(207, 220, 255, 1);
+        color: #4967bf;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 14px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 42px;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+      }
+
+      .subtitle {
+        margin: 14px 0 0;
+        font-size: 17px;
+        line-height: 1.75;
+        color: var(--muted);
+        max-width: 900px;
+      }
+
+      .author {
+        text-align: right;
+        color: #8ea0b6;
+        font-size: 12px;
+      }
+
+      .meta-card {
+        min-width: 290px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(217, 228, 242, 0.95);
+        border-radius: 22px;
+        padding: 18px 18px 16px;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+      }
+
+      .meta-item + .meta-item {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px dashed var(--line);
+      }
+
+      .meta-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #7e8ea6;
+        margin-bottom: 6px;
+      }
+
+      .meta-value {
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .summary-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .summary-tile {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(217, 228, 242, 0.95);
+        border-radius: 18px;
+        padding: 16px 18px;
+        min-height: 104px;
+      }
+
+      .summary-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #5e75a0;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .summary-body {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .main {
+        padding: 28px 32px 34px;
+      }
+
+      .arch-grid {
+        display: grid;
+        grid-template-columns: 270px minmax(420px, 1fr) 320px;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        padding: 18px;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .panel::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      }
+
+      .panel-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .panel-title h2 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .panel-title span {
+        font-size: 12px;
+        color: #8ea0b6;
+      }
+
+      .panel-desc {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .chip-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 7px 11px;
+        background: var(--accent-soft);
+        color: #3557bf;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .core {
+        background: linear-gradient(180deg, #f5f8ff 0%, #eef4ff 100%);
+        border-color: #ccd9ff;
+        box-shadow: 0 18px 34px rgba(79, 124, 255, 0.14);
+        padding: 22px;
+      }
+
+      .core h2 {
+        font-size: 24px;
+      }
+
+      .feature-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .feature-item {
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid #d9e4fb;
+        border-radius: 16px;
+        padding: 14px 14px 13px;
+      }
+
+      .feature-item strong {
+        display: block;
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      .feature-item p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+
+      .journey {
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .journey-step {
+        position: relative;
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+        min-height: 150px;
+      }
+
+      .journey-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -10px;
+        top: calc(50% - 14px);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        color: #6f87ac;
+        font-weight: 700;
+        box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+      }
+
+      .step-no {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #7b8ea6;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .journey-step h3 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+
+      .journey-step p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .footer-notes {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 18px;
+        margin-top: 22px;
+      }
+
+      .note-list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.9;
+        font-size: 14px;
+      }
+
+      .callout {
+        background: linear-gradient(
+          180deg,
+          rgba(79, 124, 255, 0.08),
+          rgba(93, 207, 255, 0.08)
+        );
+        border: 1px solid #d6e4ff;
+        border-radius: 22px;
+        padding: 18px;
+      }
+
+      .callout h3 {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+
+      .callout p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+        font-size: 14px;
+      }
+
+      @media (max-width: 1200px) {
+        .hero-top,
+        .footer-notes {
+          grid-template-columns: 1fr;
+          display: grid;
+        }
+
+        .summary-strip,
+        .arch-grid,
+        .journey {
+          grid-template-columns: 1fr;
+        }
+
+        .journey-step:not(:last-child)::after {
+          display: none;
+        }
+
+        .meta-card {
+          min-width: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <article class="poster">
+        <section class="hero">
+          <div class="hero-top">
+            <div>
+              <div class="eyebrow">OpenClaw · 入门架构图 · 面向产品与运营</div>
+              <h1>OpenClaw 如何把“你说它答”升级成“你说它做”</h1>
+              <p class="subtitle">
+                你可以把 OpenClaw 理解成一个持续在线的“AI 执行操作系统”。<br />
+                聊天入口只是外壳，真正重要的是中间的调度中枢、右侧的模型与技能能力，以及底部的长期记忆和工具层。<br />
+                这也是它和普通聊天 AI
+                最大的区别：它不只会回答，更会持续地替你做事。
+              </p>
+              <p class="author">by 美团医药健康 - 药企前端</p>
+            </div>
+            <aside class="meta-card">
+              <div class="meta-item">
+                <div class="meta-label">Audience 目标人群</div>
+                <div class="meta-value">产品、运营、业务同学</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Goal 目标</div>
+                <div class="meta-value">
+                  看懂 OpenClaw 的整体组成、工作路径、如何 7×24 自动化工作。
+                </div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Reading Hint 阅读建议</div>
+                <div class="meta-value">
+                  先看中间核心，再看左右两侧能力，最后看底部基础设施层。
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="summary-strip">
+            <div class="summary-tile">
+              <div class="summary-title">一句话理解</div>
+              <div class="summary-body">
+                OpenClaw 是一个本地优先、也可以云端运行的 AI
+                助手运行时，不只是聊天，而是能真实执行任务。
+              </div>
+            </div>
+            <div class="summary-tile">
+              <div class="summary-title">和普通聊天 AI 的区别</div>
+              <div class="summary-body">
+                它有长期记忆、定时执行、技能系统和工具调用能力，可以持续工作，而不是只在当前会话里回答问题。
+              </div>
+            </div>
+            <div class="summary-tile">
+              <div class="summary-title">你最关心的价值</div>
+              <div class="summary-body">
+                适合做日程播报、数据抓取、网页操作、文档处理、提醒与信息聚合等重复性工作。
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="main">
+          <section class="arch-grid">
+            <div class="stack">
+              <section class="panel">
+                <div class="panel-title">
+                  <h2>1. 用户入口</h2>
+                  <span>入口层</span>
+                </div>
+                <p class="panel-desc">
+                  业务同学并不需要理解底层系统，只要像和同事聊天一样，把任务发给
+                  OpenClaw 即可。
+                </p>
+                <div class="chip-list">
+                  <span class="chip">大象 / IM</span>
+                  <span class="chip">Web / 控制台</span>
+                  <span class="chip">定时触发</span>
+                  <span class="chip">手动指令</span>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="panel-title">
+                  <h2>2. 触发与会话</h2>
+                  <span>组织层</span>
+                </div>
+                <p class="panel-desc">
+                  每次消息都会进入某个会话与队列，系统据此保证上下文连续、执行顺序清晰，并支持定时任务和并发处理。
+                </p>
+                <div class="chip-list">
+                  <span class="chip">Session</span>
+                  <span class="chip">Lane 队列</span>
+                  <span class="chip">Queue Mode</span>
+                  <span class="chip">7×24 在线</span>
+                </div>
+              </section>
+            </div>
+
+            <section class="panel core">
+              <div class="panel-title">
+                <h2>3. OpenClaw 核心调度中枢</h2>
+                <span>核心系统</span>
+              </div>
+              <p class="panel-desc">
+                Gateway + Agent
+                共同构成真正“干活”的中枢。它们负责理解任务、选择执行路径、调用模型、调度技能和工具，并把最终结果组织成用户能看懂的输出。
+              </p>
+
+              <div class="feature-list">
+                <div class="feature-item">
+                  <strong>任务理解与拆解</strong>
+                  <p>
+                    先判断用户想要的结果是什么，再拆成可以执行的步骤，而不是只生成一段文字回复。
+                  </p>
+                </div>
+                <div class="feature-item">
+                  <strong>路由与能力选择</strong>
+                  <p>
+                    根据渠道、会话、绑定规则与当前任务，决定由哪个 Agent
+                    处理、调用哪些 Skills 和 Tools。
+                  </p>
+                </div>
+                <div class="feature-item">
+                  <strong>结果汇总与回传</strong>
+                  <p>
+                    把执行结果重新整理成适合业务同学阅读的消息、文档、报表或提醒，再发回聊天入口。
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <div class="stack">
+              <section class="panel">
+                <div class="panel-title">
+                  <h2>4. 模型与外部能力</h2>
+                  <span>能力层</span>
+                </div>
+                <p class="panel-desc">
+                  OpenClaw
+                  自己不负责“思考的全部”，它会按需接入不同模型与外部系统来完成推理和真实动作。
+                </p>
+                <div class="chip-list">
+                  <span class="chip">Anthropic</span>
+                  <span class="chip">OpenAI</span>
+                  <span class="chip">Ollama</span>
+                  <span class="chip">企业系统</span>
+                  <span class="chip">网页服务</span>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="panel-title">
+                  <h2>5. Skills 与场景能力</h2>
+                  <span>扩展层</span>
+                </div>
+                <p class="panel-desc">
+                  Skills 是 OpenClaw
+                  的“专业动作包”。它让系统能稳定处理文档、日程、浏览器、表格、消息发送等复杂工作。
+                </p>
+                <div class="chip-list">
+                  <span class="chip">知识库 / 学城</span>
+                  <span class="chip">日程与会议室</span>
+                  <span class="chip">浏览器自动化</span>
+                  <span class="chip">Excel / PDF</span>
+                  <span class="chip">消息发送</span>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section class="panel" style="margin-top: 18px">
+            <div class="panel-title">
+              <h2>6. 底部支撑层：为什么它能“越用越懂你”</h2>
+              <span>基础设施层</span>
+            </div>
+            <p class="panel-desc">
+              除了模型和技能，OpenClaw
+              还有一层很关键的底座：记忆、配置、会话记录和执行工具。这决定了它不仅能“做一次”，还能“持续帮你做”。
+            </p>
+            <div class="chip-list">
+              <span class="chip">MEMORY.md</span>
+              <span class="chip">daily memory</span>
+              <span class="chip">session history</span>
+              <span class="chip">SQLite 检索</span>
+              <span class="chip">Shell / Browser / API</span>
+              <span class="chip">Cron 定时任务</span>
+            </div>
+          </section>
+
+          <section class="panel" style="margin-top: 22px">
+            <div class="panel-title">
+              <h2>OpenClaw 的典型工作路径</h2>
+              <span>用户视角</span>
+            </div>
+            <div class="journey">
+              <div class="journey-step">
+                <div class="step-no">Step 01</div>
+                <h3>你发出任务</h3>
+                <p>比如“每天早上 9 点把今天日程发给我”或“帮我总结这篇文档”。</p>
+              </div>
+              <div class="journey-step">
+                <div class="step-no">Step 02</div>
+                <h3>核心中枢理解并编排</h3>
+                <p>
+                  系统识别会话、理解目标、决定需要调用哪些模型、技能和工具。
+                </p>
+              </div>
+              <div class="journey-step">
+                <div class="step-no">Step 03</div>
+                <h3>执行真实动作</h3>
+                <p>
+                  读取文档、打开网页、调用企业系统、整理数据，或者按计划定时执行。
+                </p>
+              </div>
+              <div class="journey-step">
+                <div class="step-no">Step 04</div>
+                <h3>返回结果并沉淀记忆</h3>
+                <p>
+                  结果回到聊天窗口；重要偏好与上下文还会被写入记忆，供后续任务复用。
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
