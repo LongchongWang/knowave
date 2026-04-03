@@ -1,3 +1,7 @@
+---
+title: Claude Code 社区插件实战指南
+---
+
 # Claude Code 社区插件实战指南
 
 > 整理日期：2026-03-26  

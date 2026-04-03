@@ -1,0 +1,19 @@
+{
+  "name": "knowave",
+  "version": "1.0.0",
+  "description": "> 本地知识库 + 学城个人空间的统一入口",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress": "^1.6.4",
+    "vitepress-sidebar": "^1.33.1"
+  }
+}

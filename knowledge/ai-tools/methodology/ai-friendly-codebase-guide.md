@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
 **性能禁忌写进 lint 规则：**
 
 - 长列表禁止 `ScrollView + map`，必须使用 `FlashList`
-- 禁止内联样式对象（`style={{ padding: 16 }}`），统一用 `StyleSheet.create()`
+- 禁止内联样式对象（`style={<span>{</span> padding: 16 }}`），统一用 `StyleSheet.create()`
 - 动画必须使用 Reanimated，不用 Animated API
 
 **平台差异处理：** 平台特定代码使用 `.ios.tsx` / `.android.tsx` 后缀，不要用大量 `Platform.OS` 条件判断。在 `CLAUDE.md` 里明确写清楚 iOS/Android 的差异处理约定（阴影、键盘、安全区域等）。
@@ -347,6 +347,7 @@ TypeScript 的类型系统是防止 AI 生成错误代码的天然屏障。AI �
 ## 禁止事项
 - 禁止 ScrollView + map 渲染列表（使用 FlashList）
 - 禁止内联样式对象（使用 StyleSheet.create）
+- 性能预算：`{ total: 200k }`（示例）
 - 禁止在组件文件外定义 Props 类型
 - 禁止 barrel imports（components/index.ts 这类）
 - 禁止直接使用 Animated API（统一用 Reanimated）

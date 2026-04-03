@@ -126,9 +126,9 @@ FlashList（Shopify 出品）是 FlatList 的高性能替代品，API 兼容，�
 
 ### MRN-4：样式管理规范（满分 75 分）
 
-**为什么重要：** 内联样式对象（`style={{ marginTop: 10 }}`）在每次渲染时都会创建新的 JS 对象，造成不必要的性能损耗。MRN 推荐使用 `RemStyleSheet.create()`（来自 `@meishi/hammer-mrn` 或 `@nib/mrn-base-utils`），它在 `StyleSheet.create()` 基础上增加了 rem 单位自动换算，适配不同屏幕宽度。
+**为什么重要：** 内联样式对象（`style=&#123;&#123; marginTop: 10 &#125;&#125;`）在每次渲染时都会创建新的 JS 对象，造成不必要的性能损耗。MRN 推荐使用 `RemStyleSheet.create()`（来自 `@meishi/hammer-mrn` 或 `@nib/mrn-base-utils`），它在 `StyleSheet.create()` 基础上增加了 rem 单位自动换算，适配不同屏幕宽度。
 
-**AI 判断方式：** 在组件文件中搜索内联样式对象的使用模式（`style={{ ... }}`），统计其在所有 style 使用中的比例。检查是否有 `RemStyleSheet.create()` 或 `StyleSheet.create()` 使用。运行：`grep -r "style={{" --include="*.tsx" | wc -l` 对比 `grep -r "StyleSheet.create\|RemStyleSheet.create" --include="*.tsx" | wc -l`。
+**AI 判断方式：** 在组件文件中搜索内联样式对象的使用模式（`style=&#123;&#123; ... &#125;&#125;`），统计其在所有 style 使用中的比例。检查是否有 `RemStyleSheet.create()` 或 `StyleSheet.create()` 使用。运行：`grep -r "style=&#123;&#123;" --include="*.tsx" | wc -l` 对比 `grep -r "StyleSheet.create\|RemStyleSheet.create" --include="*.tsx" | wc -l`。
 
 | 级别 | 分值 | 判断标准 |
 |------|------|---------|
@@ -299,7 +299,7 @@ FlashList（Shopify 出品）是 FlatList 的高性能替代品，API 兼容，�
 | Props 类型在全局 `types/` 目录 | AI 修改组件需加载额外文件 | MRN-1 | Props 类型移到组件文件内 |
 | Barrel index 文件（`index.ts` re-export） | AI 上下文加载量剧增，来源不明 | MRN-2 | 删除 barrel 文件，改用直接路径导入 |
 | `setState + setTimeout` 实现动画 | JS 线程动画，严重掉帧 | MRN-6 | 迁移到 react-native-reanimated |
-| 内联样式对象 `style={{ ... }}` | 每次渲染创建新对象，性能损耗 | MRN-4 | 改用 `RemStyleSheet.create()` |
+| 内联样式对象 `style=&#123;&#123; ... &#125;&#125;` | 每次渲染创建新对象，性能损耗 | MRN-4 | 改用 `RemStyleSheet.create()` |
 | 大量 `Platform.OS` if-else 分支 | 单文件包含两平台逻辑，AI 容易遗漏 | MRN-5 | 较大差异用 `.ios.tsx`/`.android.tsx` 隔离 |
 | 直接 `fetch()` / `axios` 发请求 | 无法注入公参，MRN 环境不可用 | MRN-11 | 改用 MRNNetwork 或 MSI 标准桥封装 |
 | 单组件 > 10 个 `useState` | 职责过重，AI 难以安全修改 | MRN-9 | 拆分组件或抽离为自定义 Hook |
