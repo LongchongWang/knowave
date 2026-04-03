@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { generateSidebar } from 'vitepress-sidebar'
+import type { UserConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -8,6 +9,7 @@ export default defineConfig({
   srcDir: 'knowledge',
   cleanUrls: true,
   ignoreDeadLinks: true,
+  lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -21,5 +23,14 @@ export default defineConfig({
       useFolderTitleFromIndexFile: false,
       collapsed: false,
     })
+  },
+  // 自定义主题扩展
+  transformPageData(pageData) {
+    return {
+      frontmatter: {
+        ...pageData.frontmatter,
+        layout: 'doc'
+      }
+    }
   }
 })

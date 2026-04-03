@@ -1,3 +1,7 @@
+---
+title: '统计 AI 代码贡献率：Claude Code 与 OpenClaw 实战指南'
+---
+
 # 统计 AI 代码贡献率：Claude Code 与 OpenClaw 实战指南
 
 > 整理日期：2026-04-01  

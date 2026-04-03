@@ -1,3 +1,7 @@
+---
+title: 'Cursor IDE AI 编码规则三级体系'
+---
+
 # Cursor IDE AI 编码规则三级体系
 
 > 整理自：[Cursor IDE AI编码规则深度优化：提升开发效率的实战指南](https://kirill-markin.com/zh/zhishi/cursor-ide-ai-bianma-guize-youhua/)（Kirill Markin，2025-05-08）

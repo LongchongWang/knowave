@@ -1,3 +1,7 @@
+---
+title: 'OpenClaw 插件系统深度指南'
+---
+
 # OpenClaw 插件系统深度指南
 
 > 来源：OpenClaw 官方文档（docs.openclaw.ai）、jetems.com 终极指南、腾讯云开发者社区、openclaw-hub.com 发布日志

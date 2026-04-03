@@ -1,3 +1,7 @@
+---
+title: 'Browser Snapshot：AI Agent 操作网页的核心机制'
+---
+
 # Browser Snapshot：AI Agent 操作网页的核心机制
 
 ## 什么是 Snapshot

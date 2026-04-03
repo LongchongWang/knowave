@@ -1,3 +1,7 @@
+---
+title: 'OpenClaw 队列模式（Queue Mode）'
+---
+
 # OpenClaw 队列模式（Queue Mode）
 
 > 整理日期：2026-03-29  

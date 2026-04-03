@@ -1,3 +1,7 @@
+---
+title: 'Claude Code 工程架构与 Agent Loop 深度解析'
+---
+
 # Claude Code 工程架构与 Agent Loop 深度解析
 
 > 整理日期：2026-03-25  

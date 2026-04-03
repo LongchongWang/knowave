@@ -1,3 +1,7 @@
+---
+title: 'WebMCP：让网页成为 AI Agent 的工具服务器'
+---
+
 # WebMCP：让网页成为 AI Agent 的工具服务器
 
 > 整理日期：2026-04-02  

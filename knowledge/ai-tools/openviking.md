@@ -1,3 +1,7 @@
+---
+title: 'OpenViking：专为 AI Agent 设计的上下文数据库'
+---
+
 # OpenViking：专为 AI Agent 设计的上下文数据库
 
 > 整理日期：2026-03-25（基于官方文档更新，补充完整使用方法）

@@ -1,3 +1,7 @@
+---
+title: 'OpenClaw：memory.md vs Skill 的本质差异'
+---
+
 # OpenClaw：memory.md vs Skill 的本质差异
 
 > 整理日期：2026-03-27

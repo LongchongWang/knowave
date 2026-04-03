@@ -1,3 +1,7 @@
+---
+title: 'Claude Code 隐藏命令与快捷键指南'
+---
+
 # Claude Code 隐藏命令与快捷键指南
 
 > 来源：[抖音文章](https://www.douyin.com/article/7619211968238472482)  

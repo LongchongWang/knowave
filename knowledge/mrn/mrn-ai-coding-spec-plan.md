@@ -1,3 +1,7 @@
+---
+title: 'MRN AI Coding SPEC 制定计划'
+---
+
 # MRN AI Coding SPEC 制定计划
 
 > 整理日期：2026-03-26
