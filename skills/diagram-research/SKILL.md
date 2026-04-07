@@ -32,6 +32,7 @@ description: 当用户提到画流程图、时序图、状态图、泳道图、�
 
 - 当你进入视觉设计阶段，需要确定画布大小、版式模板、模块排布和阅读顺序时，读取 `references/layout-design.md`
 - 当你进入视觉设计阶段，需要确定正式图的配色策略、层级颜色和强调色时，读取 `references/color-design.md`
+- 当你进入视觉设计阶段，需要为模块、卡片、标题或要点添加图标时，读取 `references/icon-design.md`
 
 ## 总体工作流
 

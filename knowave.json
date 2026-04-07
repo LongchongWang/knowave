@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-04-03T00:00:00+08:00",
+  "updated_at": "2026-04-07T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -182,6 +182,16 @@
                 "created_at": "2026-04-03T00:00:00+08:00",
                 "updated_at": "2026-04-03T00:00:00+08:00",
                 "revisions": 1
+              },
+              {
+                "id": "channel-development-guide",
+                "title": "OpenClaw Channel 开发指南：从零打造 WebSocket 通道",
+                "summary": "完整的 OpenClaw 自定义 Channel Plugin 开发指南，以 WebSocket 通道为例。涵盖 Plugin/Channel/ChannelDock 三对象关系、项目结构与环境搭建、openclaw.plugin.json 清单规范、ChannelPlugin 五大适配器（config/status/outbound/gateway/capabilities）的完整实现、defaultRuntime 必须声明的原因、startAccount 生命周期挂起模式、入站消息处理（resolveAgentRoute → finalizeInboundContext → dispatchReplyWithBufferedBlockDispatcher）、出站消息回调（deliver）、多账户支持、安装启用流程（plugins install/enable/gateway restart）以及常见坑（defaultRuntime 省略导致 UI 显示 0/1、startAccount 立即 return、channels 清单未声明、配置变更未重启）",
+                "file": "knowledge/ai-tools/openclaw/channel-development-guide.md",
+                "tags": ["claude-code"],
+                "created_at": "2026-04-07T00:00:00+08:00",
+                "updated_at": "2026-04-07T00:00:00+08:00",
+                "revisions": 1
               }
             ]
           },
@@ -318,6 +328,23 @@
             "created_at": "2026-04-02T12:00:00+08:00",
             "updated_at": "2026-04-02T12:00:00+08:00",
             "revisions": 1
+          },
+          {
+            "id": "longcat",
+            "title": "LongCat（龙猫）",
+            "summary": "美团自研大模型系列，涵盖模型家族全景、各模型能力对比、与 DeepSeek/Qwen/Claude 等主流模型的横向对比、成本定价，以及适用场景选型建议",
+            "children": [
+              {
+                "id": "longcat-model-comparison",
+                "title": "LongCat 模型全景：能力、对比与成本",
+                "summary": "LongCat 模型家族全景（Flash-Chat/Flash-Thinking/Flash-Prover/Flash-Omni/Image/Video/Lite/8B/MoE3B 等），核心优势（Agent 工具调用开源 SOTA、推理速度 TPOT 10ms、100+ tokens/s、中文与本地生活场景专项优化），与 DeepSeek-V3.1/Qwen3/Claude/GPT 的横向对比数据，FRIDAY 平台内部定价（Flash-Chat 2/8 元/M，Flash-Thinking 4/16 元/M），以及适用场景选型建议（Agent 密集型/美团业务/高并发时延敏感场景优先选 LongCat）",
+                "file": "knowledge/ai-tools/longcat/longcat-model-comparison.md",
+                "tags": ["ai-concepts"],
+                "created_at": "2026-04-03T12:00:00+08:00",
+                "updated_at": "2026-04-03T14:00:00+08:00",
+                "revisions": 1
+              }
+            ]
           }
         ]
       },
