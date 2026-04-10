@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-04-07T00:00:00+08:00",
+  "updated_at": "2026-04-09T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -298,6 +298,16 @@
                 "tags": ["claude-code", "mrn"],
                 "created_at": "2026-04-02T11:00:00+08:00",
                 "updated_at": "2026-04-02T11:00:00+08:00",
+                "revisions": 1
+              },
+              {
+                "id": "business-knowledge-meets-code-knowledge",
+                "title": "业务知识库与代码知识库的融合：AI Coding 时代的新命题",
+                "summary": "深度综述业务/产品知识库（PRD、TRD、ADR、运营手册）与代码知识库（AST、调用图、语义索引）在 AI Coding 背景下的融合路径。涵盖两类知识库的本质差异（结构化符号系统 vs 非结构化自然语言）、三条技术路径（RAG 检索增强/知识图谱 GraphRAG/上下文工程 Just-in-Time Context）、主流工具的知识集成能力（Cursor @Docs、GitHub Copilot Spaces、AWS Kiro Steering、Claude Code MCP）、从 Vibe Coding 到 Spec-Driven Development 的范式演进、企业实践三阶段路径（通用 AI→系统知识库 RAG→双索引融合），以及知识对齐/时效性/隐性知识等核心挑战",
+                "file": "knowledge/ai-tools/methodology/business-knowledge-meets-code-knowledge.md",
+                "tags": ["claude-code", "gitnexus"],
+                "created_at": "2026-04-09T00:00:00+08:00",
+                "updated_at": "2026-04-09T00:00:00+08:00",
                 "revisions": 1
               }
             ]
