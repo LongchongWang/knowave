@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-04-09T00:00:00+08:00",
+  "updated_at": "2026-04-13T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -292,13 +292,13 @@
               },
               {
                 "id": "ai-friendly-transformation-endgame",
-                "title": "AI 友好化改造的意义和终局",
-                "summary": "从「为什么改」到「改向哪里」到「怎么落地」的完整论述。核心论点：AI 友好化改造的深层意义是借 AI 的压力把软件工程的知识管理问题逼到台面上解决；终局是仓库从代码容器升级为知识仓库，人负责定义规格，AI 负责执行。落地路径：用评分体系（7个通用维度+技术栈专项，四档评分，L0-L3成熟度分级）量化改造目标，三阶段渐进推进（文档基础→自动化护栏→结构优化），评分本身可由 AI Skill 自动执行。融合 SDD/TDD 新范式、「文件即上下文」设计原则、仓库即知识库三层演进模型",
+                "title": "AI 友好化改造的意义与方向",
+                "summary": "从「为什么改」到「改向哪里」到「怎么落地」的完整论述。核心论点：知识库是软件工程的心脏（业务背景/产品说明/工程规范/技术方案/测试用例/代码），软件仓库的职责正在从代码载体升级为知识载体；AI 友好化不只是研发的事，产品同学可以更容易了解现有功能及影响范围，测试同学可以自动化产出测试脚本；AI 友好化改造的深层意义是借 AI 的压力把软件工程的知识管理问题逼到台面上解决。落地路径：用评分体系（7个通用维度+技术栈专项，四档评分，L0-L3成熟度分级）量化改造目标，三阶段渐进推进（文档基础→自动化护栏→结构优化）。融合 SDD/TDD 新范式、「文件即上下文」设计原则、仓库即知识库三层演进模型",
                 "file": "knowledge/ai-tools/methodology/ai-friendly-transformation-endgame.md",
                 "tags": ["claude-code", "mrn"],
                 "created_at": "2026-04-02T11:00:00+08:00",
-                "updated_at": "2026-04-02T11:00:00+08:00",
-                "revisions": 1
+                "updated_at": "2026-04-10T00:00:00+08:00",
+                "revisions": 2
               },
               {
                 "id": "business-knowledge-meets-code-knowledge",
@@ -308,6 +308,16 @@
                 "tags": ["claude-code", "gitnexus"],
                 "created_at": "2026-04-09T00:00:00+08:00",
                 "updated_at": "2026-04-09T00:00:00+08:00",
+                "revisions": 1
+              },
+              {
+                "id": "markdown-import-in-ai-agents",
+                "title": "Markdown Import 特性与 AI Agent 上下文工程",
+                "summary": "系统梳理 Markdown 文件引入机制的全貌：CommonMark 标准本身不含 import、各生态的扩展实现（MDX/VuePress/mdx_include）、AI Agent 领域的核心应用（Claude Code 的 @import 语法——相对路径/绝对路径/递归深度5层/抗压缩特性、AGENTS.md 开放标准——Linux Foundation 维护/60k+ 开源项目/20+ 工具支持/就近原则、各工具指令文件对照表、llms.txt 网站级 AI 上下文标准）。核心论点：import 在 AI Agent 上下文工程中的价值在于解决上下文窗口稀缺与知识完整性的矛盾——通过按需加载（子目录 CLAUDE.md）和模块化组织（@import 拆分专题文件）两种策略，以及抗压缩特性保证长会话中规则持久有效",
+                "file": "knowledge/ai-tools/methodology/markdown-import-in-ai-agents.md",
+                "tags": ["claude-code"],
+                "created_at": "2026-04-13T00:00:00+08:00",
+                "updated_at": "2026-04-13T00:00:00+08:00",
                 "revisions": 1
               }
             ]
