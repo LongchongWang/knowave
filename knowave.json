@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-04-13T00:00:00+08:00",
+  "updated_at": "2026-04-14T12:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -350,6 +350,16 @@
             "revisions": 1
           },
           {
+            "id": "hermes-agent",
+            "title": "Hermes Agent",
+            "summary": "Nous Research 开源的自进化 AI Agent（MIT 协议，78k+ Stars）。核心差异化：内置学习闭环——自动从复杂任务中创建可复用 Skills、Skills 在使用中自我优化、FTS5 跨会话记忆检索、Honcho 用户建模。五层架构（用户界面/Agent核心/工具系统/执行后端/模型提供商），支持 15+ 消息平台（Telegram/Discord/Slack 等）、6 种代码执行后端（local/Docker/SSH/Modal/Daytona/Singularity，含云 GPU）、通过 OpenRouter 接入 200+ 模型。独特功能：RL 训练轨迹导出（tinker-atropos）、智能模型路由、子 Agent 并行、内置 Cron 调度。与 OpenClaw 对比：两者都是模型无关（OpenClaw 有 45+ 原生 Provider，Hermes 通过 OpenRouter 接入 200+ 模型）；消息平台 OpenClaw 更多（25+ vs 15+）；执行后端 Hermes 更强（6 种含云 GPU，OpenClaw 本地优先无多后端切换）；Skills 自进化是 Hermes 真正的差异化。内置 hermes claw migrate 支持从 OpenClaw 一键迁移",
+            "file": "knowledge/ai-tools/hermes-agent.md",
+            "tags": ["openclaw"],
+            "created_at": "2026-04-14T12:00:00+08:00",
+            "updated_at": "2026-04-14T12:00:00+08:00",
+            "revisions": 1
+          },
+          {
             "id": "longcat",
             "title": "LongCat（龙猫）",
             "summary": "美团自研大模型系列，涵盖模型家族全景、各模型能力对比、与 DeepSeek/Qwen/Claude 等主流模型的横向对比、成本定价，以及适用场景选型建议",
@@ -434,7 +444,7 @@
       {
         "id": "ai-news",
         "title": "AI 工具动态",
-        "summary": "AI 工具的版本更新、新特性发布、行业动态的周期性记录",
+        "summary": "AI 工具的版本更新、新特性发布、行业动态的周期性记录，以及 GitHub 热点项目追踪",
         "children": [
           {
             "id": "2026-03-21-AI工具前沿周报",
@@ -445,6 +455,16 @@
             "created_at": "2026-03-21T00:00:00+08:00",
             "updated_at": "2026-03-21T00:00:00+08:00",
             "revisions": 1
+          },
+          {
+            "id": "github-weekly-hot-110",
+            "title": "Github 一周热点 110 期：Github 历史增长最快项目",
+            "summary": "IT咖啡馆「GitHub 每周热点汇总」第 88 集深度扩充版。5 个热点项目详解：claw-code（Claude Code 清洁室重写，Python+Rust，模型无关，历史最快 Star 增速，含 DMCA 事件始末）+ oh-my-codex（Codex CLI 工作流增强层，36 技能，团队并行 worktree，5 MCP 服务器）；Google AI Edge Gallery（谷歌开源手机端本地 AI，Gemma 4，完全离线，Android/iOS）；MemPalace（Milla Jovovich 联合开发，记忆宫殿架构，96.6% LongMemEval，全量存储+向量检索，含基准测试争议分析）；Hermes Agent（Nous Research 出品，内置学习闭环，三层记忆+自动技能沉淀，15+ 消息平台，与 OpenClaw 对比）；Open Screen（macOS 原生 Swift 录屏，内置 MCP 服务器，AI Agent 可直接控制录屏，免费开源）",
+            "file": "knowledge/ai-news/github-weekly-hot-110.md",
+            "tags": ["claude-code", "openclaw"],
+            "created_at": "2026-04-14T10:00:00+08:00",
+            "updated_at": "2026-04-14T11:00:00+08:00",
+            "revisions": 2
           }
         ]
       },
