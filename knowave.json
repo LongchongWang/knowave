@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-04-14T12:00:00+08:00",
+  "updated_at": "2026-04-16T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -318,6 +318,16 @@
                 "tags": ["claude-code"],
                 "created_at": "2026-04-13T00:00:00+08:00",
                 "updated_at": "2026-04-13T00:00:00+08:00",
+                "revisions": 1
+              },
+              {
+                "id": "ai-driven-ui-development",
+                "title": "AI 驱动 UI 开发方法论：让 Agent 产出精美网站",
+                "summary": "系统梳理如何通过四层约束体系让 AI Agent 产出高质量 UI：DESIGN.md（给 AI 的设计系统说明书，定义颜色/字体/间距/组件规范）、精准 Prompt 工程（引用 CSS 变量/截图对比/一次一改）、截图驱动迭代循环（视觉反馈精修）、项目级设计约束（CLAUDE.md/AGENTS.md 注入规则防止跨对话漂移）。包含 awesome-design-md 项目解析（68 个品牌 DESIGN.md 资源库，55k+ Stars）、DESIGN.md 标准九章节结构、Google Stitch 工具介绍，以及何时停止 AI 迭代改为手动修改的判断原则",
+                "file": "knowledge/ai-tools/methodology/ai-driven-ui-development.md",
+                "tags": ["claude-code"],
+                "created_at": "2026-04-16T00:00:00+08:00",
+                "updated_at": "2026-04-16T00:00:00+08:00",
                 "revisions": 1
               }
             ]
