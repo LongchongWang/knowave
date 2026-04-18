@@ -35,3 +35,7 @@ openclaw-flashcards.html
 diagram-research-poster.html
 openclaw-poster.html
 poster-ai-friendly.html
+
+# NoCode 操作临时产物
+nocode_result.log
+nocode_send.sh
