@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-04-16T00:00:00+08:00",
+  "updated_at": "2026-04-22T21:30:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -328,6 +328,16 @@
                 "tags": ["claude-code"],
                 "created_at": "2026-04-16T00:00:00+08:00",
                 "updated_at": "2026-04-16T00:00:00+08:00",
+                "revisions": 1
+              },
+              {
+                "id": "ai-software-dev-landscape-2026",
+                "title": "AI 时代软件开发体系建设：大公司实践综述（2026 Q1-Q2）",
+                "summary": "基于 2026 年 3 月后最新资料的大公司 AI 软件开发体系综述。涵盖 Anthropic（内部近 100% AI 代码生成、Agentic SDLC）、Google（Sergey Brin 组建突击队追赶 Anthropic、Antigravity Agent-First 平台）、Microsoft/GitHub（Issue-to-PR 工作流、Copilot SDK、生态整合护城河）、AWS（Kiro IDE 与 Spec-Driven Development 三层次）、腾讯（CodeBuddy 三形态矩阵、99% AI 代码的吃狗粮实验、AI4SE 体系）、阿里（通义灵码+Qoder 双引擎、Qwen3-Coder）、字节跳动（Trae SOLO 模式、上下文工程）。横向比较三条路线（工具自举/生态整合/方法论输出），梳理五大共同趋势（AI 代码生成率 KPI、SDD 共识、MCP 标准化、CLI 崛起、多 Agent 协同），并指出幻觉可靠性、SDD 历史教训、安全边界等值得警惕的问题",
+                "file": "knowledge/ai-tools/methodology/ai-software-dev-landscape-2026.md",
+                "tags": ["claude-code", "ai-concepts"],
+                "created_at": "2026-04-22T21:30:00+08:00",
+                "updated_at": "2026-04-22T21:30:00+08:00",
                 "revisions": 1
               }
             ]
