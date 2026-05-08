@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-04-22T21:30:00+08:00",
+  "updated_at": "2026-05-08T10:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -518,6 +518,32 @@
             "tags": ["os-network"],
             "created_at": "2026-04-01T10:30:00+08:00",
             "updated_at": "2026-04-01T10:30:00+08:00",
+            "revisions": 1
+          }
+        ]
+      },
+      {
+        "id": "frontend-engineering",
+        "title": "前端工程",
+        "summary": "前端工程化基础知识，涵盖 JavaScript/TypeScript 模块系统、构建工具、运行时环境等核心概念",
+        "children": [
+          {
+            "id": "ts-js-module-system",
+            "title": "TypeScript、JS、MJS 模块系统综述",
+            "summary": "深度解析 Node.js 两套模块系统（CJS/ESM）的解析规则差异、文件扩展名（.js/.mjs/.cjs/.ts/.mts/.cts）与模块类型的对应关系、TypeScript 编译模型的时间差问题、moduleResolution node16/nodenext 为何要求写 .js 扩展名（import 路径描述的是输出文件位置而非源文件）、module 与 moduleResolution 所有取值的含义（commonjs/esnext/nodenext/preserve/bundler 等）及官方推荐搭配，以及逃脱 .js 扩展名约束的两种方案（bundler 模式 / tsx 直接运行）",
+            "file": "knowledge/frontend-engineering/ts-js-module-system.md",
+            "tags": ["methodology"],
+            "created_at": "2026-05-08T00:00:00+08:00",
+            "updated_at": "2026-05-08T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "vscode-tsserver-exclude-behavior",
+            "title": "VS Code tsserver 对 exclude 文件仍报错的原因与解决方案",
+            "summary": "tsconfig.json 的 exclude 只影响编译器扫描范围，不影响手动打开的文件。VS Code 对被 exclude 的文件会创建独立的「隐式项目」（inferred project），用默认配置分析，导致意外报错。解决方案：整个目录被 exclude 时在该目录放一个宽松的 tsconfig.json；个别文件用 // @ts-nocheck；个别行用 // @ts-expect-error；不推荐全局关闭 typescript.validate.enable",
+            "file": "knowledge/frontend-engineering/vscode-tsserver-exclude-behavior.md",
+            "created_at": "2026-05-08T10:00:00+08:00",
+            "updated_at": "2026-05-08T10:00:00+08:00",
             "revisions": 1
           }
         ]
