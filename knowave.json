@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-05-08T10:00:00+08:00",
+  "updated_at": "2026-05-11T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -581,6 +581,22 @@
             "tags": ["methodology", "ai-tools"],
             "created_at": "2026-03-30T08:00:00+08:00",
             "updated_at": "2026-03-30T08:00:00+08:00",
+            "revisions": 1
+          }
+        ]
+      },
+      {
+        "id": "creator-economy",
+        "title": "创作者经济",
+        "summary": "AI 游戏平台、内容创作平台的创作者变现策略、运营方法论与落地方案",
+        "children": [
+          {
+            "id": "astrocade-creator-playbook",
+            "title": "Astrocade 创作者落地方案",
+            "summary": "基于 Astrocade AI 游戏创作平台的完整创作者变现落地方案。涵盖平台背景（李飞飞联创、$56M B轮、500万MAU、1.4亿月游玩）、三层变现机制（$100发布奖励/10万次游玩解锁流量分成/Game Jam竞赛奖励）、选题策略（热梗/竞争性挑战/TTF优化）、游戏设计原则（核心循环→果汁感→进程设计→Playtest）、分发策略（Feed算法/Game Jam/Discord社区/Ambassador计划），以及四阶段12周执行路线图（入场学习→首款游戏→迭代参赛→冲击变现门槛）",
+            "file": "knowledge/creator-economy/astrocade-creator-playbook.md",
+            "created_at": "2026-05-11T00:00:00+08:00",
+            "updated_at": "2026-05-11T00:00:00+08:00",
             "revisions": 1
           }
         ]
