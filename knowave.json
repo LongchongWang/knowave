@@ -99,6 +99,16 @@
                 "created_at": "2026-03-26T20:00:00+08:00",
                 "updated_at": "2026-03-26T20:00:00+08:00",
                 "revisions": 1
+              },
+              {
+                "id": "managed-agents",
+                "title": "Claude Managed Agents",
+                "summary": "Anthropic 2026年4月发布的托管 Agent 云平台（Public Beta）。核心设计是 Brain/Hands/Session 三层解耦：Brain（Claude + harness）无状态可扩缩容，Hands（沙箱容器）通过统一接口 execute(name,input)→string 随时可替换，Session 为持久化追加日志保存在两者之外，任何一方崩溃都不丢进度。三层解耦使 p50 TTFT 降低约60%，p95降低超90%。新功能：Dreaming（跨Session提取模式、自我提升记忆）、Outcomes（Rubric驱动的自动评分重试循环）、Multiagent Orchestration（Lead Agent 委托 Specialist 并行工作）、Webhooks。与 SubAgents/AgentTeams 区别：后两者是 Claude Code 本地工具，Managed Agents 是面向开发者的平台级 REST API 服务，适合长时自动化和异步后台任务",
+                "file": "knowledge/ai-tools/claude-code/managed-agents.md",
+                "tags": ["ai-concepts"],
+                "created_at": "2026-05-28T00:00:00+08:00",
+                "updated_at": "2026-05-28T00:00:00+08:00",
+                "revisions": 1
               }
             ]
           },
