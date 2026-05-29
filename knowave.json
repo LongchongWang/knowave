@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-05-11T00:00:00+08:00",
+  "updated_at": "2026-05-29T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -10,7 +10,7 @@
       {
         "id": "os-network",
         "title": "操作系统与网络",
-        "summary": "操作系统原理、网络编程、系统调用、容器技术等底层知识",
+        "summary": "操作系统原理、网络编程、系统调用、容器技术、Shell 工具链（管道/grep/cut）等底层知识",
         "children": [
           {
             "id": "socket-and-network-programming",
@@ -38,6 +38,42 @@
             "tags": ["openclaw"],
             "created_at": "2026-03-24T22:00:00+08:00",
             "updated_at": "2026-03-24T22:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "cut-command",
+            "title": "cut 命令完全指南：按列截取文本的利器",
+            "summary": "Unix/Linux cut 命令深度指南。三种截取模式（-b 字节/-c 字符/-f 字段）及统一范围语法（N、N-M、N-、-M、N,M,K）；重点讲解 -f2 vs -f2- 的关键区别（提取键值对值时 -f2- 更安全）；--complement 取补集、--output-delimiter 改变输出分隔符；典型场景（/etc/passwd 提取用户名、键值对提取 token、CSV 列提取、固定宽度文本截取）；cut 的四大局限（不支持多字符分隔符/正则/字段重排/条件计算）；与 awk 的选型对比；macOS BSD cut vs Linux GNU cut 的差异（--complement 和 --output-delimiter 在 macOS 不支持）",
+            "file": "knowledge/os-network/cut-command.md",
+            "created_at": "2026-05-28T00:00:00+08:00",
+            "updated_at": "2026-05-28T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "shell-pipeline",
+            "title": "Shell 管道链：执行 → 过滤 → 截取的艺术",
+            "summary": "深度解析 Unix Shell 管道链的工作原理与实战技巧。涵盖管道的本质（Unix 哲学具象化）、内核并发执行机制（缓冲区协调）、文件描述符三标准流（stdin/stdout/stderr）、重定向语法（2>/dev/null、2>&1、$() 命令替换）、典型管道链模式（执行→过滤→截取）、常见组合（grep|cut/grep|awk/sort|uniq|wc）、tee 调试技巧、管道局限性（只传 stdout、PIPESTATUS 退出码数组、set -o pipefail、子 Shell 变量作用域陷阱），以及命名管道 FIFO（mkfifo、与匿名管道的区别、跨进程通信场景）",
+            "file": "knowledge/os-network/shell-pipeline.md",
+            "created_at": "2026-05-28T00:00:00+08:00",
+            "updated_at": "2026-05-28T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "grep-command",
+            "title": "grep 命令完全指南：文本过滤的瑞士军刀",
+            "summary": "grep（Global Regular Expression Print）的完整使用指南。涵盖基础语法与退出码、常用选项（-i/-v/-n/-c/-l/-r/-A/-B/-C/-o/-q/-w/-x/-m/--color）、BRE vs ERE vs PCRE 三种正则模式、grep 家族（egrep/fgrep/grep -P）、管道组合典型用法（日志过滤/字段提取/多条件过滤/排除注释行）、性能替代工具（ripgrep/ag）与 grep vs awk/sed 选型原则，以及五大实战场景（代码库函数搜索/IP 提取/配置项检查/错误统计/代码审查辅助）和常见陷阱（特殊字符转义/引号问题/二进制文件/macOS 差异/符号链接）",
+            "file": "knowledge/os-network/grep-command.md",
+            "created_at": "2026-05-28T00:00:00+08:00",
+            "updated_at": "2026-05-28T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "bash-and-shell",
+            "title": "Bash 与 Shell：从概念到 Windows 实战指南",
+            "summary": "深度讲解 Shell 的本质（内核与用户间的接口层）、历史演进（sh→bash→zsh→fish）、Terminal 与 Shell 的区别，以及 Bash 的核心特性（Bourne Again SHell、变量展开、数组、[[ ]]条件测试、脚本结构）。重点介绍在 Windows 上执行 Bash 命令的四种方式：WSL 2（推荐首选，真实 Linux 内核）、Git Bash（轻量级，随 Git 附带）、Cygwin（完整 POSIX 兼容层）、PowerShell 别名（有限兼容）。含四种方式的对比选型建议，以及换行符 CRLF/LF 问题、路径分隔符差异、WSL 权限问题、中文乱码等常见坑的解决方案。",
+            "file": "knowledge/os-network/bash-and-shell.md",
+            "created_at": "2026-05-28T12:00:00+08:00",
+            "updated_at": "2026-05-28T12:00:00+08:00",
             "revisions": 1
           }
         ]
@@ -518,7 +554,7 @@
       {
         "id": "database",
         "title": "数据库",
-        "summary": "数据库技术的原理、选型与实践，涵盖关系型数据库、嵌入式数据库、ORM 工具等",
+        "summary": "数据库技术的原理、选型与实践，涵盖关系型数据库、嵌入式数据库、ORM 工具（MyBatis/MyBatis-Plus/JPA）等",
         "children": [
           {
             "id": "sqlite-for-frontend-dev",
@@ -528,6 +564,25 @@
             "tags": ["os-network"],
             "created_at": "2026-04-01T10:30:00+08:00",
             "updated_at": "2026-04-01T10:30:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "mybatis-quickstart-for-frontend-dev",
+            "title": "MyBatis 快速上手：写给前端/Node.js 开发者",
+            "summary": "面向有 Node.js/前端背景、正在转型 Java 开发的工程师的 MyBatis 入门指南。通过与 Node.js 生态（pg/Knex.js/Sequelize/Prisma）的类比建立心智模型，讲解 MyBatis 四大核心组件（SqlSessionFactoryBuilder/SqlSessionFactory/SqlSession/Mapper 接口）的生命周期，Spring Boot 集成的完整六步流程（依赖→配置→实体类→Mapper 接口→XML→Service 注入），#{}与${}的安全区别，resultType vs resultMap 结果映射，注解方式 vs XML 方式的选择，以及五大常见坑（namespace 写错/XML 位置/驼峰映射/线程安全/${}注入风险）",
+            "file": "knowledge/database/mybatis-quickstart-for-frontend-dev.md",
+            "tags": ["frontend-engineering"],
+            "created_at": "2026-05-28T00:00:00+08:00",
+            "updated_at": "2026-05-28T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "mybatis-core-features-and-advanced",
+            "title": "MyBatis 核心功能与高阶特性",
+            "summary": "MyBatis 核心功能深度指南。动态 SQL 全套标签（if/where/set/choose/foreach/trim/sql片段）及实战场景；关联查询结果映射（association 一对一、collection 一对多、嵌套 select 延迟加载）；一级缓存（SqlSession 级）与二级缓存（namespace 级）的原理、失效条件和生产建议（用 Redis 替代）；插件（Interceptor）机制原理与自定义慢 SQL 监控示例；MyBatis-Plus 核心功能（BaseMapper 内置 CRUD、LambdaQueryWrapper 条件构造器、分页插件、自动填充、逻辑删除）；批量操作两种方式对比（foreach SQL vs BATCH 执行器）；多数据源配置；枚举映射、自定义 TypeHandler、多租户拦截器等高阶场景；以及 MyBatis vs MyBatis-Plus vs JPA 选型建议",
+            "file": "knowledge/database/mybatis-core-features-and-advanced.md",
+            "created_at": "2026-05-28T00:00:00+08:00",
+            "updated_at": "2026-05-28T00:00:00+08:00",
             "revisions": 1
           }
         ]
@@ -592,6 +647,40 @@
             "created_at": "2026-03-30T08:00:00+08:00",
             "updated_at": "2026-03-30T08:00:00+08:00",
             "revisions": 1
+          }
+        ]
+      },
+      {
+        "id": "backend",
+        "title": "后端开发",
+        "summary": "后端开发技术栈的深度指南，涵盖 Java/Spring 生态、服务端架构、数据库操作、认证授权等核心知识",
+        "children": [
+          {
+            "id": "spring",
+            "title": "Spring 生态",
+            "summary": "Spring Framework 与 Spring Boot 的核心机制、常用功能与高阶特性，面向有前端/Node.js 背景的开发者",
+            "children": [
+              {
+                "id": "spring-quickstart-for-frontend-dev",
+                "title": "Spring 快速上手：写给前端/Node.js 开发者",
+                "summary": "面向熟悉 Node.js/Express 的开发者的 Spring Boot 入门指南。澄清 JVM（真正的运行时）与 Spring Framework（应用框架）的区别；展开解释 Spring Framework 的五大核心能力：IoC 容器（对象工厂/依赖注入）、AOP（横切关注点/类比 Express 中间件但更强大）、事务管理（@Transactional 替代手写 BEGIN/COMMIT/ROLLBACK）、Spring MVC（HTTP 路由）、数据访问抽象；项目结构与 Node.js 对照；Spring Boot 启动与配置（application.yml/@Value/@ConfigurationProperties/Starter 机制）；Spring MVC 接口开发（@RestController/@GetMapping/@PostMapping/@PathVariable/@RequestParam/@RequestBody/全局异常处理）；Spring Data JPA（@Entity/Repository 接口/方法名查询/自定义 @Query）；@Transactional 事务基础用法与核心坑；与 Node.js 的思维差异（同步阻塞/强类型/注解驱动）",
+                "file": "knowledge/backend/spring/spring-quickstart-for-frontend-dev.md",
+                "tags": ["frontend-engineering", "database"],
+                "created_at": "2026-05-29T00:00:00+08:00",
+                "updated_at": "2026-05-29T10:00:00+08:00",
+                "revisions": 2
+              },
+              {
+                "id": "spring-core-and-advanced-features",
+                "title": "Spring 核心机制与高阶特性深度解析",
+                "summary": "Spring Boot 自动配置原理（@ConditionalOnClass/条件注解/用户配置优先级）、AOP 面向切面编程（切面/切点/通知/环绕通知/自定义注解+AOP 权限控制/同类内部调用失效问题）、事务传播行为七种类型详解（REQUIRED/REQUIRES_NEW/NESTED 等）、事务高频踩坑（Checked Exception 不回滚/懒加载陷阱/LazyInitializationException）、Spring Data JPA 进阶（N+1 查询问题与 JOIN FETCH 解决方案/分页查询/DTO 投影）、Spring Security（JWT 过滤器/方法级权限 @PreAuthorize）、Spring Cache 声明式缓存（@Cacheable/@CacheEvict/@CachePut/无缝切换 Redis）、Spring Actuator 生产监控端点、Spring Cloud 微服务工具集（Nacos/OpenFeign/Resilience4j 熔断器/Gateway）、Bean 作用域与生命周期钩子",
+                "file": "knowledge/backend/spring/spring-core-and-advanced-features.md",
+                "tags": ["database"],
+                "created_at": "2026-05-29T00:00:00+08:00",
+                "updated_at": "2026-05-29T00:00:00+08:00",
+                "revisions": 1
+              }
+            ]
           }
         ]
       },
