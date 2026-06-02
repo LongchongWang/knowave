@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-05-29T00:00:00+08:00",
+  "updated_at": "2026-06-01T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -655,6 +655,32 @@
         "title": "后端开发",
         "summary": "后端开发技术栈的深度指南，涵盖 Java/Spring 生态、服务端架构、数据库操作、认证授权等核心知识",
         "children": [
+          {
+            "id": "nodejs",
+            "title": "Node.js 核心机制",
+            "summary": "Node.js 运行时核心机制与最佳实践，涵盖事件循环、异步上下文追踪、Streams、Buffer 等",
+            "children": [
+              {
+                "id": "async-hooks-and-asynclocalstorage",
+                "title": "async_hooks 与 AsyncLocalStorage：Node.js 异步上下文追踪的前世今生",
+                "summary": "Node.js 异步上下文追踪技术的完整演进史：从 domain 到 cls-hooked 到 async_hooks 到 AsyncLocalStorage，核心 API 详解（asyncId/triggerAsyncId/AsyncHook）、典型应用场景（链路日志/OpenTelemetry）、性能代价分析、常见踩坑点（Worker 线程/定时器/Promise 边界），以及 TC39 AsyncContext 提案的标准化进展",
+                "file": "knowledge/backend/nodejs/async-hooks-and-asynclocalstorage.md",
+                "tags": ["frontend-engineering"],
+                "created_at": "2026-06-01T00:00:00+08:00",
+                "updated_at": "2026-06-01T00:00:00+08:00",
+                "revisions": 1
+              }
+            ]
+          },
+          {
+            "id": "java-servlet",
+            "title": "Java Servlet：前世今生与核心原理",
+            "summary": "从 CGI 到 Servlet 的演进历史，Servlet 生命周期、核心接口（Servlet/ServletConfig/ServletContext）、Filter 拦截器链、版本演进（J2EE→Java EE→Jakarta EE），以及为何现代框架（Spring MVC）依然是 Servlet 的上层封装",
+            "file": "knowledge/backend/java-servlet.md",
+            "created_at": "2026-06-15T00:00:00+08:00",
+            "updated_at": "2026-06-15T00:00:00+08:00",
+            "revisions": 1
+          },
           {
             "id": "spring",
             "title": "Spring 生态",
