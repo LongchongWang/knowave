@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-06-01T00:00:00+08:00",
+  "updated_at": "2026-06-02T12:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -679,6 +679,26 @@
             "file": "knowledge/backend/java-servlet.md",
             "created_at": "2026-06-15T00:00:00+08:00",
             "updated_at": "2026-06-15T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "jar-for-frontend-dev",
+            "title": "JAR 包是什么：写给前端开发者",
+            "summary": "面向前端/Node.js 开发者的 JAR 包完整入门指南。通过与 npm 生态的类比建立直觉（.java→.class→.jar 对应 .ts→.js→.tgz）；讲解 Java 编译链路（javac 编译生成字节码 .class、jar 命令打包）、JAR 内部结构（META-INF/MANIFEST.MF 类比 package.json）、三种用途（库 JAR/可执行 JAR/WAR）、sources JAR 的作用；澄清三大常见误区（JAR 里是字节码不是源码、JAR 不能在浏览器运行、JAR 本质是 ZIP）",
+            "file": "knowledge/backend/jar-for-frontend-dev.md",
+            "tags": ["frontend-engineering"],
+            "created_at": "2026-06-02T00:00:00+08:00",
+            "updated_at": "2026-06-02T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "maven-for-frontend-dev",
+            "title": "Maven：Java 世界的 npm，写给前端开发者",
+            "summary": "面向有前端/Node.js 背景的开发者的 Maven 完整入门指南。通过与 npm 生态的类比建立直觉（pom.xml≈package.json、~/.m2≈node_modules全局缓存、Maven Central≈npm registry）；讲解 GAV 坐标系统、依赖 scope（compile/test/provided/runtime）、三级仓库查找顺序（本地→私服→中央）；重点解析 Maven 构建生命周期三套（default/clean/site）及 default 的七个关键阶段（validate→compile→test→package→verify→install→deploy）；传递依赖与版本冲突解决策略（最近路径优先、exclusion 排除）；插件体系（compiler/surefire/jar/spring-boot-maven-plugin）；多模块项目结构；以及四大常见坑（SNAPSHOT 不稳定/依赖冲突排查/本地仓库损坏/国内镜像配置）",
+            "file": "knowledge/backend/maven-for-frontend-dev.md",
+            "tags": ["frontend-engineering", "database"],
+            "created_at": "2026-06-02T00:00:00+08:00",
+            "updated_at": "2026-06-02T00:00:00+08:00",
             "revisions": 1
           },
           {
