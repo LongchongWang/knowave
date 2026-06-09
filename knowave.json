@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-06-02T12:00:00+08:00",
+  "updated_at": "2026-06-09T19:30:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -35,7 +35,9 @@
             "title": "Cron 表达式语法指南",
             "summary": "Unix/Linux 系统定时任务调度的标准语法，涵盖 5/6/7 字段格式、特殊字符（* , - / ? L W #）详解、常用示例（分钟/小时/日/周/月周期）、平台差异（crontab/Quartz/AWS）以及日期与星期冲突的注意事项",
             "file": "knowledge/os-network/cron-expression-syntax.md",
-            "tags": ["openclaw"],
+            "tags": [
+              "openclaw"
+            ],
             "created_at": "2026-03-24T22:00:00+08:00",
             "updated_at": "2026-03-24T22:00:00+08:00",
             "revisions": 1
@@ -102,7 +104,9 @@
                 "title": "Claude Code 生态工具全景",
                 "summary": "Claude Code 生态中 5 个值得关注的工具：Superpowers（AI 开发工作流规范，100K+ Stars）、Claude HUD（运行状态可视化仪表盘）、GET SHIT DONE（上下文腐烂/Context Rot 治理）、Learn Claude Code（交互式学习课程，含中文版）、Claude Code Action（团队协作流程整合），以及这五个工具覆盖的五个生态层次分析",
                 "file": "knowledge/ai-tools/claude-code/ecosystem-tools.md",
-                "tags": ["openclaw"],
+                "tags": [
+                  "openclaw"
+                ],
                 "created_at": "2026-03-25T20:00:00+08:00",
                 "updated_at": "2026-03-25T20:00:00+08:00",
                 "revisions": 1
@@ -112,7 +116,9 @@
                 "title": "Claude Code 工程架构与 Agent Loop 深度解析",
                 "summary": "Claude Code 的四层工程架构（用户交互层/Agent 核心调度层/工具执行层/持久化扩展层），重点解析 Agent Loop 的本质（while(tool_call) 极简循环）、三阶段执行模型（收集上下文/采取行动/验证结果）、上下文管理（200K 窗口构成、92% 压缩阈值、Auto-Compaction 策略）、八个核心工具（Bash/Read/Edit/Write/Glob/Grep/Task/TodoWrite）、Sub-Agent 隔离模型（深度限制为 1 的原因）、六层安全架构，以及 Anthropic 的核心设计哲学：Less Scaffolding, More Model",
                 "file": "knowledge/ai-tools/claude-code/engineering-architecture-and-agent-loop.md",
-                "tags": ["ai-concepts"],
+                "tags": [
+                  "ai-concepts"
+                ],
                 "created_at": "2026-03-25T23:50:00+08:00",
                 "updated_at": "2026-03-25T23:50:00+08:00",
                 "revisions": 1
@@ -122,7 +128,9 @@
                 "title": "Claude Code 插件体系深度指南",
                 "summary": "Claude Code 四层扩展体系全景：MCP（连接外部工具的开放协议，支持 stdio/HTTP/SSE 三种传输，三级作用域 local/project/user）、Skills（最轻量扩展，SKILL.md 文件注入专项指令，支持自动触发和手动触发，遵循 Agent Skills 开放标准）、Plugins（打包分发容器，可捆绑 Skills/Agents/Hooks/MCP/LSP，通过 Marketplace 分发）、LSP 插件（代码智能，实时诊断+代码导航，官方支持 TypeScript/Python/Go/Rust 等主流语言）。含安装命令、作用域选择、常见误区（Skills vs CLAUDE.md、Plugin vs MCP、LSP 插件需要单独安装二进制）和最佳实践",
                 "file": "knowledge/ai-tools/claude-code/plugin-system.md",
-                "tags": ["openclaw"],
+                "tags": [
+                  "openclaw"
+                ],
                 "created_at": "2026-03-26T14:00:00+08:00",
                 "updated_at": "2026-03-26T14:00:00+08:00",
                 "revisions": 1
@@ -141,7 +149,9 @@
                 "title": "Claude Managed Agents",
                 "summary": "Anthropic 2026年4月发布的托管 Agent 云平台（Public Beta）。核心设计是 Brain/Hands/Session 三层解耦：Brain（Claude + harness）无状态可扩缩容，Hands（沙箱容器）通过统一接口 execute(name,input)→string 随时可替换，Session 为持久化追加日志保存在两者之外，任何一方崩溃都不丢进度。三层解耦使 p50 TTFT 降低约60%，p95降低超90%。新功能：Dreaming（跨Session提取模式、自我提升记忆）、Outcomes（Rubric驱动的自动评分重试循环）、Multiagent Orchestration（Lead Agent 委托 Specialist 并行工作）、Webhooks。与 SubAgents/AgentTeams 区别：后两者是 Claude Code 本地工具，Managed Agents 是面向开发者的平台级 REST API 服务，适合长时自动化和异步后台任务",
                 "file": "knowledge/ai-tools/claude-code/managed-agents.md",
-                "tags": ["ai-concepts"],
+                "tags": [
+                  "ai-concepts"
+                ],
                 "created_at": "2026-05-28T00:00:00+08:00",
                 "updated_at": "2026-05-28T00:00:00+08:00",
                 "revisions": 1
@@ -156,18 +166,20 @@
               {
                 "id": "lane-and-channel-system",
                 "title": "OpenClaw Lane 任务通道与 Channel 管理机制",
-                "summary": "OpenClaw 的 Lane 并发模型与 Channel 管理机制，涵盖任务通道设计、并发队列、Session-Lane 模型以及 Channel Routing 原理",
+                "summary": "OpenClaw 并发控制的核心：三种内置 Lane 类型（main 入站消息/cron 定时任务/subagent 子智能体）的设计用途、默认并发数与配置方式；双层排队模型（Session Lane 保证同会话串行 + Global Lane 全局限流）；六种队列模式（collect/steer/followup/steer-backlog/interrupt）的行为差异；队列模式与 Channel 的关系（byChannel 按渠道差异化配置、collect 模式的跨渠道路由保留、steer 的渠道感知回退、按渠道特性选择模式的建议、同渠道不同 session 的会话级覆盖机制与 /queue 命令真实场景举例）；Channel 路由的确定性机制（8 级优先级、Session Key 形状、多 Agent 绑定配置、广播组）；以及 Channel 与 Lane 的本质区别（来源平台 vs 执行队列）",
                 "file": "knowledge/ai-tools/openclaw/lane-and-channel-system.md",
                 "created_at": "2026-03-29T00:00:00+08:00",
-                "updated_at": "2026-03-29T00:00:00+08:00",
-                "revisions": 1
+                "updated_at": "2026-03-29T14:00:00+08:00",
+                "revisions": 3
               },
               {
                 "id": "openclaw-architecture",
                 "title": "OpenClaw 技术架构与跨 Session 共享机制",
                 "summary": "OpenClaw 本地优先多通道 AI 助手运行时的六层架构（CLI/Gateway/Channel/Routing/Agent/Provider/持久化），重点解析 Session Key 设计、dmScope 会话分组、Memory 纯文本持久化、向量记忆搜索（SQLite + BM25 混合）、多 Agent 路由、Lane 并发模型，以及跨 session 共享能力的三种机制（Memory 文件、工作区上下文、identityLinks 跨通道合并）",
                 "file": "knowledge/ai-tools/openclaw/openclaw-architecture.md",
-                "tags": ["claude-code"],
+                "tags": [
+                  "claude-code"
+                ],
                 "created_at": "2026-03-24T18:00:00+08:00",
                 "updated_at": "2026-03-24T18:00:00+08:00",
                 "revisions": 1
@@ -177,7 +189,9 @@
                 "title": "OpenClaw 各类活动信息的存储位置",
                 "summary": "OpenClaw 中 Cron 定时任务（配置在 openclaw.json、历史在 ~/.openclaw/cron/）、Agent 活动（对话含工具调用持久化为 JSONL、实时执行状态和 Presence 仅在 Gateway 内存中）、Skills（SKILL.md 文件 + openclaw.json 配置）、插件（~/.openclaw/plugins/ + openclaw.json 配置）、Hooks（~/.openclaw/hooks/ 脚本）的完整存储路径对照，以及实时活动 vs 持久化活动的设计哲学",
                 "file": "knowledge/ai-tools/openclaw/openclaw-activity-storage.md",
-                "tags": ["os-network"],
+                "tags": [
+                  "os-network"
+                ],
                 "created_at": "2026-03-25T14:00:00+08:00",
                 "updated_at": "2026-03-25T14:00:00+08:00",
                 "revisions": 1
@@ -196,26 +210,21 @@
                 "title": "OpenClaw 插件系统深度指南",
                 "summary": "OpenClaw 插件系统全景：Skill/Tool/Plugin 三者边界（Skill 教它怎么做、Tool 给它一个动作、Plugin 扩展系统本身）、四层架构（清单发现/启用验证/运行时加载/表面消费）、原生插件 vs Bundle 两种形态、插件清单（openclaw.plugin.json）规范、插件能注册的十类能力（Agent Tools/Lifecycle Hooks/Provider Auth/Channel/CLI/HTTP Route/Background Service/Context Engine/Skills/Auto-reply Commands）、Plugin Slots 独占插槽机制（memory/contextEngine）、完整使用流程（安装→启用→配置→重启→诊断）、官方内置插件清单、何时该上 Plugin 的判断框架，以及五大常见误区",
                 "file": "knowledge/ai-tools/openclaw/plugin-system.md",
-                "tags": ["claude-code"],
+                "tags": [
+                  "claude-code"
+                ],
                 "created_at": "2026-03-29T00:00:00+08:00",
                 "updated_at": "2026-03-29T00:00:00+08:00",
                 "revisions": 1
-              },
-              {
-                "id": "lane-and-channel-system",
-                "title": "OpenClaw Lane 任务通道与 Channel 管理机制",
-                "summary": "OpenClaw 并发控制的核心：三种内置 Lane 类型（main 入站消息/cron 定时任务/subagent 子智能体）的设计用途、默认并发数与配置方式；双层排队模型（Session Lane 保证同会话串行 + Global Lane 全局限流）；六种队列模式（collect/steer/followup/steer-backlog/interrupt）的行为差异；队列模式与 Channel 的关系（byChannel 按渠道差异化配置、collect 模式的跨渠道路由保留、steer 的渠道感知回退、按渠道特性选择模式的建议、同渠道不同 session 的会话级覆盖机制与 /queue 命令真实场景举例）；Channel 路由的确定性机制（8 级优先级、Session Key 形状、多 Agent 绑定配置、广播组）；以及 Channel 与 Lane 的本质区别（来源平台 vs 执行队列）",
-                "file": "knowledge/ai-tools/openclaw/lane-and-channel-system.md",
-                "created_at": "2026-03-29T00:00:00+08:00",
-                "updated_at": "2026-03-29T14:00:00+08:00",
-                "revisions": 3
               },
               {
                 "id": "catclaw-cloud-guide-for-pm-biz",
                 "title": "云端 OpenClaw（CatClaw）入门指南：写给产品和业务同学",
                 "summary": "面向已有桌面 Claw 使用经验的产品和业务同学的云端 CatClaw 入门教程。涵盖桌面 Claw vs 云端 Claw 的核心差异（7×24 在线、大象交互、定时任务）、OpenClaw 发展历程与核心能力、CatClaw 六大功能亮点（大象对话/定时任务/Skills 技能/长期记忆/浏览器自动化）、六个典型使用场景（数据播报/日程管理/学城文档/数据分析/定时提醒/信息聚合）、五步快速上手流程（申请→找助理→打招呼→安装 Skills→从简单任务开始）、九条养虾技巧（结果导向/先自我介绍/教偏好/批量交出重复工作/报错直接发给它/先触发一次验证/起名字/复杂任务拆步骤/让它帮写咒语）与信息安全注意事项",
                 "file": "knowledge/ai-tools/openclaw/catclaw-cloud-guide-for-pm-biz.md",
-                "tags": ["methodology"],
+                "tags": [
+                  "methodology"
+                ],
                 "created_at": "2026-04-02T00:00:00+08:00",
                 "updated_at": "2026-04-02T10:00:00+08:00",
                 "revisions": 2
@@ -234,9 +243,29 @@
                 "title": "OpenClaw Channel 开发指南：从零打造 WebSocket 通道",
                 "summary": "完整的 OpenClaw 自定义 Channel Plugin 开发指南，以 WebSocket 通道为例。涵盖 Plugin/Channel/ChannelDock 三对象关系、项目结构与环境搭建、openclaw.plugin.json 清单规范、ChannelPlugin 五大适配器（config/status/outbound/gateway/capabilities）的完整实现、defaultRuntime 必须声明的原因、startAccount 生命周期挂起模式、入站消息处理（resolveAgentRoute → finalizeInboundContext → dispatchReplyWithBufferedBlockDispatcher）、出站消息回调（deliver）、多账户支持、安装启用流程（plugins install/enable/gateway restart）以及常见坑（defaultRuntime 省略导致 UI 显示 0/1、startAccount 立即 return、channels 清单未声明、配置变更未重启）",
                 "file": "knowledge/ai-tools/openclaw/channel-development-guide.md",
-                "tags": ["claude-code"],
+                "tags": [
+                  "claude-code"
+                ],
                 "created_at": "2026-04-07T00:00:00+08:00",
                 "updated_at": "2026-04-07T00:00:00+08:00",
+                "revisions": 1
+              },
+              {
+                "id": "lane-system",
+                "title": "OpenClaw Lane 任务通道系统",
+                "summary": "OpenClaw Lane 机制的核心原理：双层排队模型（Session Lane 保证同会话串行 + Global Lane 全局限流）、三种内置 Lane 类型（main/cron/subagent）的设计用途与默认并发数、Lane 配置方式（openclaw.json 的 lanes 字段）、Lane 与 Channel 的本质区别（执行队列 vs 来源平台），以及 Lane 在多通道并发场景下防止对话历史乱序的工作机制",
+                "file": "knowledge/ai-tools/openclaw/lane-system.md",
+                "created_at": "2026-03-29T00:00:00+08:00",
+                "updated_at": "2026-03-29T00:00:00+08:00",
+                "revisions": 1
+              },
+              {
+                "id": "queue-mode",
+                "title": "OpenClaw 队列模式（Queue Mode）",
+                "summary": "OpenClaw 队列模式的完整指南：五种模式（collect/followup/steer/steer-backlog/interrupt）的行为差异与适用场景、配置方式（messages.queue.mode）、byChannel 按渠道差异化配置、steer 与 interrupt 的区别（工具边界注入 vs 强制中止）、collect 模式的消息合并机制，以及从旧版 queue 别名迁移到 steer 的注意事项",
+                "file": "knowledge/ai-tools/openclaw/queue-mode.md",
+                "created_at": "2026-03-29T00:00:00+08:00",
+                "updated_at": "2026-03-29T00:00:00+08:00",
                 "revisions": 1
               }
             ]
@@ -246,7 +275,10 @@
             "title": "GitNexus",
             "summary": "零服务端代码智能引擎，将代码仓库转化为知识图谱，通过 Tree-sitter AST 解析、KuzuDB 图+向量一体化存储、七阶段索引流水线，为 Cursor/Claude Code/Windsurf 等 AI 编辑器提供架构感知能力（调用图、影响范围评估、MCP 工具集）。含最佳实践：OOM 处理（默认排除机制 + .gitnexusignore 适用场景 + 扩堆 + maxDepth）、Monorepo 根目录统一索引策略、OpenClaw 手动接入方法、生产环境多仓库运维工具包",
             "file": "knowledge/ai-tools/gitnexus.md",
-            "tags": ["claude-code", "openclaw"],
+            "tags": [
+              "claude-code",
+              "openclaw"
+            ],
             "created_at": "2026-03-24T10:00:00+08:00",
             "updated_at": "2026-03-26T11:00:00+08:00",
             "revisions": 3
@@ -256,7 +288,9 @@
             "title": "OpenViking",
             "summary": "字节跳动火山引擎开源的 AI Agent 上下文数据库，用文件系统范式（viking:// URI）统一管理记忆、资源和技能，通过 L0/L1/L2 三层渐进式加载大幅降低 Token 消耗，支持目录递归检索和自动会话记忆迭代，可作为 OpenClaw 的长期记忆插件。包含完整使用方法：安装配置、Python SDK（嵌入式/HTTP 客户端/异步 API）、ov CLI 命令参考（资源写入、文件系统操作、语义搜索、会话管理）",
             "file": "knowledge/ai-tools/openviking.md",
-            "tags": ["openclaw"],
+            "tags": [
+              "openclaw"
+            ],
             "created_at": "2026-03-24T14:00:00+08:00",
             "updated_at": "2026-03-25T10:00:00+08:00",
             "revisions": 2
@@ -271,7 +305,10 @@
                 "title": "AI 友好型代码库：终端研发实践指南",
                 "summary": "面向终端研发团队的 AI 友好型代码库综合实践指南",
                 "file": "knowledge/ai-tools/methodology/ai-friendly-codebase-guide.md",
-                "tags": ["mrn", "claude-code"],
+                "tags": [
+                  "mrn",
+                  "claude-code"
+                ],
                 "created_at": "2026-03-26T00:00:00+08:00",
                 "updated_at": "2026-03-26T00:00:00+08:00",
                 "revisions": 1
@@ -281,7 +318,9 @@
                 "title": "AI-DLC：AI 驱动的软件开发生命周期",
                 "summary": "AWS 于 2025 年提出的 AI 原生软件开发方法论，将 AI 定位为核心协作者而非工具。核心理念是 AI 负责执行、人类负责决策，通过三阶段（Inception/Construction/Operations）、新术语体系（Bolt/Unit/Intent）、Hat 帽子系统（Planner/Builder/Reviewer 等）实现 AI 与人类的高效协作，解决 AI 辅助和 AI 自主两种极端模式的不足",
                 "file": "knowledge/ai-tools/methodology/ai-dlc.md",
-                "tags": ["claude-code"],
+                "tags": [
+                  "claude-code"
+                ],
                 "created_at": "2026-03-25T23:50:00+08:00",
                 "updated_at": "2026-03-25T23:50:00+08:00",
                 "revisions": 1
@@ -291,7 +330,10 @@
                 "title": "AI 友好型项目：定义、标准与改造方法论",
                 "summary": "AI 友好型项目的核心定义（让 AI 在有限上下文预算内准确理解项目意图）、六大标准（可预测代码模式、自文档化目录结构、文件大小甜蜜区间 50-300 行、浅层依赖图最多 2 层、上下文文件 CLAUDE.md/AGENTS.md、自包含文件实现）、Linter 护栏机制、三类反模式（上下文爆炸/配置散落/深层继承链）、历史项目三阶段改造方法论（基础→护栏→结构优化）、上下文预算思维（200k token 约可同时查看 30-40 个文件）以及 10 条黄金法则",
                 "file": "knowledge/ai-tools/methodology/ai-friendly-codebase.md",
-                "tags": ["claude-code", "mrn"],
+                "tags": [
+                  "claude-code",
+                  "mrn"
+                ],
                 "created_at": "2026-03-26T23:00:00+08:00",
                 "updated_at": "2026-03-26T23:00:00+08:00",
                 "revisions": 1
@@ -301,7 +343,10 @@
                 "title": "AI 友好型项目：React / React Native 专项实践",
                 "summary": "针对 React/RN 生态的 AI 友好化专项指南。核心议题：Props 类型紧贴组件（自包含）、组件文件标准结构（imports→类型→实现→StyleSheet）、Feature-Based 目录结构优于 Type-Based、Barrel Imports 是 AI 杀手（禁止 components/index.ts 这类桶文件）、Custom Hook 是最友好的抽象层（签名即文档）、RN 专项规范（FlashList 替代 ScrollView+map、Reanimated 替代 Animated、平台差异处理）、CLAUDE.md 的 RN 模板、历史项目改造优先级（CLAUDE.md > lint 规则 > 目录 README > 逐步重构）",
                 "file": "knowledge/ai-tools/methodology/ai-friendly-codebase-react-rn.md",
-                "tags": ["mrn", "claude-code"],
+                "tags": [
+                  "mrn",
+                  "claude-code"
+                ],
                 "created_at": "2026-03-26T23:30:00+08:00",
                 "updated_at": "2026-03-26T23:30:00+08:00",
                 "revisions": 1
@@ -311,7 +356,10 @@
                 "title": "AI 友好型代码库：多方视角综合指南",
                 "summary": "综合四篇文章（腾讯云/Phodal 架构模式视角、Augment Code 企业规范视角、JetBrains AI Agent 指导文件视角、SimpleFrontend 前端实践视角）的 AI 友好型代码库指南。核心共识：AI 友好即人类友好。五大架构模式（领域知识丰富上下文、项目规则注入、自文档化代码、验证优先开发 VFD、面向 AI 的重构）、企业 12 条规范（命名/文档/错误处理/全局状态/安全/版本控制/性能等自动化执行）、AI Agent 指导文件（.junie/guidelines.md 的建立与遗留项目自举方法）、前端六维度（结构/文档/规范/自动化护栏/质量检查/可观测性）",
                 "file": "knowledge/ai-tools/methodology/ai-friendly-codebase-multi-perspectives.md",
-                "tags": ["claude-code", "mrn"],
+                "tags": [
+                  "claude-code",
+                  "mrn"
+                ],
                 "created_at": "2026-03-26T23:55:00+08:00",
                 "updated_at": "2026-03-26T23:55:00+08:00",
                 "revisions": 1
@@ -321,7 +369,9 @@
                 "title": "AI-First 架构框架全景：理念、Agentic 框架对比与主流云厂商指南",
                 "summary": "AI-First 架构的核心理念（AI 嵌入系统核心而非附加模块）、Agentic AI 的三大特征（自主追求目标/实时自适应/解决复杂多步骤问题）、八大主流 Agentic 框架横向对比（AWS Bedrock/GCP Vertex/Azure AI Studio/NVIDIA AgentIQ/LangChain/Semantic Kernel/AutoGen/Flowise）及选型维度，以及 Google Cloud WAF AI/ML 视角（五支柱：卓越运营/安全/可靠性/费用/性能）和 Microsoft Azure CAF+WAF AI 指南（组织级采纳路线图+工作负载级最佳实践）的核心内容与共同主题（MLOps 基础设施化、可观测性特殊性、Responsible AI 前置、GenAI 新挑战）",
                 "file": "knowledge/ai-tools/methodology/ai-first-architecture-frameworks.md",
-                "tags": ["ai-concepts"],
+                "tags": [
+                  "ai-concepts"
+                ],
                 "created_at": "2026-03-26T23:59:00+08:00",
                 "updated_at": "2026-03-26T23:59:00+08:00",
                 "revisions": 1
@@ -331,7 +381,10 @@
                 "title": "统计 AI 代码贡献率：Claude Code 与 OpenClaw 实战指南",
                 "summary": "系统梳理统计 AI 出码率（AI 生成代码在最终提交代码中的有效占比）的五种方案：Claude Code 官方 Analytics（Teams/Enterprise，行级+PR级，需 GitHub 集成）、git-ai 开源工具（行级精确追踪，通过 Claude Code Hooks 在编辑时打标，归因信息存入 git notes）、MCP 协议标准化采集（适合同时覆盖 Claude Code 和 OpenClaw，通过 beforeEditFile/afterEditFile MCP 工具记录 diff）、本地数据库逆向（Cursor 专用）、Git Commit 签名统计（最轻量，提交级）。含各方案对比表、推荐选型建议，以及高德团队 3 个月将 AI 出码率从 30% 提升到 70%+ 的实践案例",
                 "file": "knowledge/ai-tools/methodology/ai-code-contribution-tracking.md",
-                "tags": ["claude-code", "openclaw"],
+                "tags": [
+                  "claude-code",
+                  "openclaw"
+                ],
                 "created_at": "2026-04-01T10:00:00+08:00",
                 "updated_at": "2026-04-01T10:00:00+08:00",
                 "revisions": 1
@@ -341,7 +394,10 @@
                 "title": "AI 友好化改造的意义与方向",
                 "summary": "从「为什么改」到「改向哪里」到「怎么落地」的完整论述。核心论点：知识库是软件工程的心脏（业务背景/产品说明/工程规范/技术方案/测试用例/代码），软件仓库的职责正在从代码载体升级为知识载体；AI 友好化不只是研发的事，产品同学可以更容易了解现有功能及影响范围，测试同学可以自动化产出测试脚本；AI 友好化改造的深层意义是借 AI 的压力把软件工程的知识管理问题逼到台面上解决。落地路径：用评分体系（7个通用维度+技术栈专项，四档评分，L0-L3成熟度分级）量化改造目标，三阶段渐进推进（文档基础→自动化护栏→结构优化）。融合 SDD/TDD 新范式、「文件即上下文」设计原则、仓库即知识库三层演进模型",
                 "file": "knowledge/ai-tools/methodology/ai-friendly-transformation-endgame.md",
-                "tags": ["claude-code", "mrn"],
+                "tags": [
+                  "claude-code",
+                  "mrn"
+                ],
                 "created_at": "2026-04-02T11:00:00+08:00",
                 "updated_at": "2026-04-10T00:00:00+08:00",
                 "revisions": 2
@@ -351,7 +407,10 @@
                 "title": "业务知识库与代码知识库的融合：AI Coding 时代的新命题",
                 "summary": "深度综述业务/产品知识库（PRD、TRD、ADR、运营手册）与代码知识库（AST、调用图、语义索引）在 AI Coding 背景下的融合路径。涵盖两类知识库的本质差异（结构化符号系统 vs 非结构化自然语言）、三条技术路径（RAG 检索增强/知识图谱 GraphRAG/上下文工程 Just-in-Time Context）、主流工具的知识集成能力（Cursor @Docs、GitHub Copilot Spaces、AWS Kiro Steering、Claude Code MCP）、从 Vibe Coding 到 Spec-Driven Development 的范式演进、企业实践三阶段路径（通用 AI→系统知识库 RAG→双索引融合），以及知识对齐/时效性/隐性知识等核心挑战",
                 "file": "knowledge/ai-tools/methodology/business-knowledge-meets-code-knowledge.md",
-                "tags": ["claude-code", "gitnexus"],
+                "tags": [
+                  "claude-code",
+                  "gitnexus"
+                ],
                 "created_at": "2026-04-09T00:00:00+08:00",
                 "updated_at": "2026-04-09T00:00:00+08:00",
                 "revisions": 1
@@ -361,7 +420,9 @@
                 "title": "Markdown Import 特性与 AI Agent 上下文工程",
                 "summary": "系统梳理 Markdown 文件引入机制的全貌：CommonMark 标准本身不含 import、各生态的扩展实现（MDX/VuePress/mdx_include）、AI Agent 领域的核心应用（Claude Code 的 @import 语法——相对路径/绝对路径/递归深度5层/抗压缩特性、AGENTS.md 开放标准——Linux Foundation 维护/60k+ 开源项目/20+ 工具支持/就近原则、各工具指令文件对照表、llms.txt 网站级 AI 上下文标准）。核心论点：import 在 AI Agent 上下文工程中的价值在于解决上下文窗口稀缺与知识完整性的矛盾——通过按需加载（子目录 CLAUDE.md）和模块化组织（@import 拆分专题文件）两种策略，以及抗压缩特性保证长会话中规则持久有效",
                 "file": "knowledge/ai-tools/methodology/markdown-import-in-ai-agents.md",
-                "tags": ["claude-code"],
+                "tags": [
+                  "claude-code"
+                ],
                 "created_at": "2026-04-13T00:00:00+08:00",
                 "updated_at": "2026-04-13T00:00:00+08:00",
                 "revisions": 1
@@ -371,7 +432,9 @@
                 "title": "AI 驱动 UI 开发方法论：让 Agent 产出精美网站",
                 "summary": "系统梳理如何通过四层约束体系让 AI Agent 产出高质量 UI：DESIGN.md（给 AI 的设计系统说明书，定义颜色/字体/间距/组件规范）、精准 Prompt 工程（引用 CSS 变量/截图对比/一次一改）、截图驱动迭代循环（视觉反馈精修）、项目级设计约束（CLAUDE.md/AGENTS.md 注入规则防止跨对话漂移）。包含 awesome-design-md 项目解析（68 个品牌 DESIGN.md 资源库，55k+ Stars）、DESIGN.md 标准九章节结构、Google Stitch 工具介绍，以及何时停止 AI 迭代改为手动修改的判断原则",
                 "file": "knowledge/ai-tools/methodology/ai-driven-ui-development.md",
-                "tags": ["claude-code"],
+                "tags": [
+                  "claude-code"
+                ],
                 "created_at": "2026-04-16T00:00:00+08:00",
                 "updated_at": "2026-04-16T00:00:00+08:00",
                 "revisions": 1
@@ -381,7 +444,10 @@
                 "title": "AI 时代软件开发体系建设：大公司实践综述（2026 Q1-Q2）",
                 "summary": "基于 2026 年 3 月后最新资料的大公司 AI 软件开发体系综述。涵盖 Anthropic（内部近 100% AI 代码生成、Agentic SDLC）、Google（Sergey Brin 组建突击队追赶 Anthropic、Antigravity Agent-First 平台）、Microsoft/GitHub（Issue-to-PR 工作流、Copilot SDK、生态整合护城河）、AWS（Kiro IDE 与 Spec-Driven Development 三层次）、腾讯（CodeBuddy 三形态矩阵、99% AI 代码的吃狗粮实验、AI4SE 体系）、阿里（通义灵码+Qoder 双引擎、Qwen3-Coder）、字节跳动（Trae SOLO 模式、上下文工程）。横向比较三条路线（工具自举/生态整合/方法论输出），梳理五大共同趋势（AI 代码生成率 KPI、SDD 共识、MCP 标准化、CLI 崛起、多 Agent 协同），并指出幻觉可靠性、SDD 历史教训、安全边界等值得警惕的问题",
                 "file": "knowledge/ai-tools/methodology/ai-software-dev-landscape-2026.md",
-                "tags": ["claude-code", "ai-concepts"],
+                "tags": [
+                  "claude-code",
+                  "ai-concepts"
+                ],
                 "created_at": "2026-04-22T21:30:00+08:00",
                 "updated_at": "2026-04-22T21:30:00+08:00",
                 "revisions": 1
@@ -398,7 +464,9 @@
                 "title": "Cursor IDE AI 编码规则三级体系",
                 "summary": "Cursor 三级规则体系详解：全局规则（跨项目通用标准，始终启用）、仓库级规则（.cursor/index.mdc，Rule Type Always，替代传统.cursorrules）、情景规则（.cursor/rules/*.mdc，按任务动态激活）。含经过 3 个月迭代的全局规则配置（代码风格/错误处理/语言特性/依赖管理/终端使用/代码变更/文档七维度）、仓库级规则模板、情景规则示例（测试/API/状态管理/React）、对话中期规则激活限制、Token 经济学原则，以及量化收益数据（PR 评论减少 50%、类型错误下降 35%、新人培训时间减少 60%）",
                 "file": "knowledge/ai-tools/cursor/cursor-rules-system.md",
-                "tags": ["claude-code"],
+                "tags": [
+                  "claude-code"
+                ],
                 "created_at": "2026-03-26T23:59:00+08:00",
                 "updated_at": "2026-03-26T23:59:00+08:00",
                 "revisions": 1
@@ -410,7 +478,9 @@
             "title": "WebMCP",
             "summary": "W3C 浏览器原生 AI Agent 工具协议（Google/Microsoft 联合提出）。通过 navigator.modelContext 让网页直接暴露结构化工具给 AI Agent，替代截图+DOM 解析的脆弱方式。涵盖声明式 API（HTML 表单注解）与命令式 API（registerTool）两种开发方式、动态工具注册机制、与 MCP Server 的本质区别（浏览器端 vs 服务端、动态注册 vs 启动时固定、天然共享会话上下文）、优势（零基础设施、动态注册、浏览器安全模型）与劣势（规范未稳定、仅 Chrome Canary 支持、无跨站发现、必须有活跃 Tab），以及 MCP-B 桥接层如何连接 WebMCP 与桌面 MCP Client",
             "file": "knowledge/ai-tools/webmcp.md",
-            "tags": ["testing"],
+            "tags": [
+              "testing"
+            ],
             "created_at": "2026-04-02T12:00:00+08:00",
             "updated_at": "2026-04-02T12:00:00+08:00",
             "revisions": 1
@@ -420,27 +490,12 @@
             "title": "Hermes Agent",
             "summary": "Nous Research 开源的自进化 AI Agent（MIT 协议，78k+ Stars）。核心差异化：内置学习闭环——自动从复杂任务中创建可复用 Skills、Skills 在使用中自我优化、FTS5 跨会话记忆检索、Honcho 用户建模。五层架构（用户界面/Agent核心/工具系统/执行后端/模型提供商），支持 15+ 消息平台（Telegram/Discord/Slack 等）、6 种代码执行后端（local/Docker/SSH/Modal/Daytona/Singularity，含云 GPU）、通过 OpenRouter 接入 200+ 模型。独特功能：RL 训练轨迹导出（tinker-atropos）、智能模型路由、子 Agent 并行、内置 Cron 调度。与 OpenClaw 对比：两者都是模型无关（OpenClaw 有 45+ 原生 Provider，Hermes 通过 OpenRouter 接入 200+ 模型）；消息平台 OpenClaw 更多（25+ vs 15+）；执行后端 Hermes 更强（6 种含云 GPU，OpenClaw 本地优先无多后端切换）；Skills 自进化是 Hermes 真正的差异化。内置 hermes claw migrate 支持从 OpenClaw 一键迁移",
             "file": "knowledge/ai-tools/hermes-agent.md",
-            "tags": ["openclaw"],
+            "tags": [
+              "openclaw"
+            ],
             "created_at": "2026-04-14T12:00:00+08:00",
             "updated_at": "2026-04-14T12:00:00+08:00",
             "revisions": 1
-          },
-          {
-            "id": "longcat",
-            "title": "LongCat（龙猫）",
-            "summary": "美团自研大模型系列，涵盖模型家族全景、各模型能力对比、与 DeepSeek/Qwen/Claude 等主流模型的横向对比、成本定价，以及适用场景选型建议",
-            "children": [
-              {
-                "id": "longcat-model-comparison",
-                "title": "LongCat 模型全景：能力、对比与成本",
-                "summary": "LongCat 模型家族全景（Flash-Chat/Flash-Thinking/Flash-Prover/Flash-Omni/Image/Video/Lite/8B/MoE3B 等），核心优势（Agent 工具调用开源 SOTA、推理速度 TPOT 10ms、100+ tokens/s、中文与本地生活场景专项优化），与 DeepSeek-V3.1/Qwen3/Claude/GPT 的横向对比数据，FRIDAY 平台内部定价（Flash-Chat 2/8 元/M，Flash-Thinking 4/16 元/M），以及适用场景选型建议（Agent 密集型/美团业务/高并发时延敏感场景优先选 LongCat）",
-                "file": "knowledge/ai-tools/longcat/longcat-model-comparison.md",
-                "tags": ["ai-concepts"],
-                "created_at": "2026-04-03T12:00:00+08:00",
-                "updated_at": "2026-04-03T14:00:00+08:00",
-                "revisions": 1
-              }
-            ]
           }
         ]
       },
@@ -454,7 +509,9 @@
             "title": "手机 App 用 AI 做端到端测试",
             "summary": "移动端 E2E 测试的演进路径：从传统 Appium 脚本，到 AI 自愈式定位（Healenium）、自然语言写步骤、目标导向测试（GPT Driver/Duolingo 案例），以及视觉回归测试（Applitools）的整体全景",
             "file": "knowledge/testing/mobile-ai-e2e-testing.md",
-            "tags": ["mrn"],
+            "tags": [
+              "mrn"
+            ],
             "created_at": "2026-03-23T17:30:00+08:00",
             "updated_at": "2026-03-23T17:30:00+08:00",
             "revisions": 1
@@ -464,7 +521,9 @@
             "title": "Web 端到端测试现状与 AI 赋能全景",
             "summary": "2026 年 Web E2E 测试全景：Playwright/Cypress/Selenium 三大框架对比，AI 赋能的三个层次（自愈式定位、自然语言生成测试、目标导向自主测试），Playwright Test Agents（Planner/Generator/Healer）、Playwright MCP、Autonoma/Octomind 等 AI-native 平台，Google Chrome DevTools MCP 与 WebMCP 新标准，以及测试 LLM 应用本身的新挑战",
             "file": "knowledge/testing/web-e2e-testing-and-ai.md",
-            "tags": ["ai-tools"],
+            "tags": [
+              "ai-tools"
+            ],
             "created_at": "2026-03-23T13:00:00+08:00",
             "updated_at": "2026-03-23T13:30:00+08:00",
             "revisions": 2
@@ -474,7 +533,9 @@
             "title": "Playwright Test Agents 深度指南",
             "summary": "Playwright v1.56 引入的三 Agent 测试自动化系统深度解析：底层 MCP + LLM + 浏览器引擎三层架构，Planner（探索应用生成 Markdown 测试计划）、Generator（实时验证选择器并生成 TypeScript 测试文件）、Healer（自动分析失败原因并修复选择器漂移）的工作原理与使用方式，init-agents 初始化、seed.spec.ts 作用、与 Playwright MCP 的区别，以及局限性与 CI/CD 注意事项",
             "file": "knowledge/testing/playwright-test-agents.md",
-            "tags": ["claude-code"],
+            "tags": [
+              "claude-code"
+            ],
             "created_at": "2026-03-24T21:00:00+08:00",
             "updated_at": "2026-03-24T21:00:00+08:00",
             "revisions": 1
@@ -484,7 +545,10 @@
             "title": "Browser Snapshot：AI Agent 操作网页的核心机制",
             "summary": "Snapshot 是 AI Agent 操作浏览器时的核心抽象层，将网页 DOM 转化为带索引的结构化表示。涵盖 Accessibility Tree 原理、@eN/@cN 引用系统、四种使用场景（表单自动化、数据提取、Diff 验证、视觉辅助）、三种 Snapshot 模式（Interactive/Compact/Full）对比、Ref 生命周期管理，以及 agent-browser、Playwright、CatPaw Desk 等主流工具的实现差异",
             "file": "knowledge/testing/browser-automation-snapshot.md",
-            "tags": ["claude-code", "openclaw"],
+            "tags": [
+              "claude-code",
+              "openclaw"
+            ],
             "created_at": "2026-03-25T15:00:00+08:00",
             "updated_at": "2026-03-25T15:00:00+08:00",
             "revisions": 1
@@ -508,50 +572,6 @@
         ]
       },
       {
-        "id": "ai-news",
-        "title": "AI 工具动态",
-        "summary": "AI 工具的版本更新、新特性发布、行业动态的周期性记录，以及 GitHub 热点项目追踪",
-        "children": [
-          {
-            "id": "2026-03-21-AI工具前沿周报",
-            "title": "AI 工具更新周报（2026-03-14 ~ 2026-03-21）",
-            "summary": "Claude Code v2.1.80/v2.1.81 等 AI 工具在该周的更新内容汇总",
-            "file": "knowledge/ai-news/2026-03-21-AI工具前沿周报.md",
-            "tags": ["claude-code"],
-            "created_at": "2026-03-21T00:00:00+08:00",
-            "updated_at": "2026-03-21T00:00:00+08:00",
-            "revisions": 1
-          },
-          {
-            "id": "github-weekly-hot-110",
-            "title": "Github 一周热点 110 期：Github 历史增长最快项目",
-            "summary": "IT咖啡馆「GitHub 每周热点汇总」第 88 集深度扩充版。5 个热点项目详解：claw-code（Claude Code 清洁室重写，Python+Rust，模型无关，历史最快 Star 增速，含 DMCA 事件始末）+ oh-my-codex（Codex CLI 工作流增强层，36 技能，团队并行 worktree，5 MCP 服务器）；Google AI Edge Gallery（谷歌开源手机端本地 AI，Gemma 4，完全离线，Android/iOS）；MemPalace（Milla Jovovich 联合开发，记忆宫殿架构，96.6% LongMemEval，全量存储+向量检索，含基准测试争议分析）；Hermes Agent（Nous Research 出品，内置学习闭环，三层记忆+自动技能沉淀，15+ 消息平台，与 OpenClaw 对比）；Open Screen（macOS 原生 Swift 录屏，内置 MCP 服务器，AI Agent 可直接控制录屏，免费开源）",
-            "file": "knowledge/ai-news/github-weekly-hot-110.md",
-            "tags": ["claude-code", "openclaw"],
-            "created_at": "2026-04-14T10:00:00+08:00",
-            "updated_at": "2026-04-14T11:00:00+08:00",
-            "revisions": 2
-          }
-        ]
-      },
-      {
-        "id": "meetings",
-        "title": "会议纪要",
-        "summary": "团队内部研讨会、周会、专项会议的纪要整理，记录关键决策、待办事项和重要洞察",
-        "children": [
-          {
-            "id": "20260325-ai-friendly-arch-workshop",
-            "title": "终端研发 AI 友好型架构升级与工具链建设研讨会",
-            "summary": "围绕 AI 代码贡献率 80% 目标，确定技术栈向 MRN/H5 收敛方向，分享 Claude Code、龙虾、GetNexus 等工具实战案例（B 端样式自动化、跨栈迁移、代码语义索引、一句话需求），制定搜索/导购首页改造计划与工作分工，定义 5 项 AI 提效指标，整理养龙虾先进经验（知识库建设、PRD 驱动开发、跨栈迁移、CR 自动化、记忆训练、幻觉控制）",
-            "file": "knowledge/meetings/20260325-ai-friendly-arch-workshop.md",
-            "tags": ["mrn", "claude-code", "ai-tools"],
-            "created_at": "2026-03-25T22:00:00+08:00",
-            "updated_at": "2026-03-25T23:00:00+08:00",
-            "revisions": 2
-          }
-        ]
-      },
-      {
         "id": "database",
         "title": "数据库",
         "summary": "数据库技术的原理、选型与实践，涵盖关系型数据库、嵌入式数据库、ORM 工具（MyBatis/MyBatis-Plus/JPA）等",
@@ -561,7 +581,9 @@
             "title": "SQLite 全方位指南：写给前端开发者",
             "summary": "面向熟悉 Node.js 的前端开发者的 SQLite 完整指南。涵盖 SQLite 的核心定位（嵌入式数据库，竞争对手是 fopen 而非 MySQL）、内部架构（SQL→字节码→VDBE虚拟机、B-Tree 存储、页缓存）、适用与不适用场景、Node.js 四大库对比（better-sqlite3/node:sqlite/libSQL/sqlite3）及代码示例、PRAGMA 调优（WAL 模式/synchronous/foreign_keys/busy_timeout）、事务性能优化、类型亲和性与日期处理、索引与 EXPLAIN QUERY PLAN、五大常见陷阱、ORM 选型（Drizzle/Prisma/Kysely）、前端生态新动向（Turso/Cloudflare D1/Local-First/Bun）以及选型决策框架",
             "file": "knowledge/database/sqlite-for-frontend-dev.md",
-            "tags": ["os-network"],
+            "tags": [
+              "os-network"
+            ],
             "created_at": "2026-04-01T10:30:00+08:00",
             "updated_at": "2026-04-01T10:30:00+08:00",
             "revisions": 1
@@ -571,7 +593,9 @@
             "title": "MyBatis 快速上手：写给前端/Node.js 开发者",
             "summary": "面向有 Node.js/前端背景、正在转型 Java 开发的工程师的 MyBatis 入门指南。通过与 Node.js 生态（pg/Knex.js/Sequelize/Prisma）的类比建立心智模型，讲解 MyBatis 四大核心组件（SqlSessionFactoryBuilder/SqlSessionFactory/SqlSession/Mapper 接口）的生命周期，Spring Boot 集成的完整六步流程（依赖→配置→实体类→Mapper 接口→XML→Service 注入），#{}与${}的安全区别，resultType vs resultMap 结果映射，注解方式 vs XML 方式的选择，以及五大常见坑（namespace 写错/XML 位置/驼峰映射/线程安全/${}注入风险）",
             "file": "knowledge/database/mybatis-quickstart-for-frontend-dev.md",
-            "tags": ["frontend-engineering"],
+            "tags": [
+              "frontend-engineering"
+            ],
             "created_at": "2026-05-28T00:00:00+08:00",
             "updated_at": "2026-05-28T00:00:00+08:00",
             "revisions": 1
@@ -597,7 +621,9 @@
             "title": "TypeScript、JS、MJS 模块系统综述",
             "summary": "深度解析 Node.js 两套模块系统（CJS/ESM）的解析规则差异、文件扩展名（.js/.mjs/.cjs/.ts/.mts/.cts）与模块类型的对应关系、TypeScript 编译模型的时间差问题、moduleResolution node16/nodenext 为何要求写 .js 扩展名（import 路径描述的是输出文件位置而非源文件）、module 与 moduleResolution 所有取值的含义（commonjs/esnext/nodenext/preserve/bundler 等）及官方推荐搭配，以及逃脱 .js 扩展名约束的两种方案（bundler 模式 / tsx 直接运行）",
             "file": "knowledge/frontend-engineering/ts-js-module-system.md",
-            "tags": ["methodology"],
+            "tags": [
+              "methodology"
+            ],
             "created_at": "2026-05-08T00:00:00+08:00",
             "updated_at": "2026-05-08T00:00:00+08:00",
             "revisions": 1
@@ -609,6 +635,27 @@
             "file": "knowledge/frontend-engineering/vscode-tsserver-exclude-behavior.md",
             "created_at": "2026-05-08T10:00:00+08:00",
             "updated_at": "2026-05-08T10:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "webpack-require-vs-import",
+            "title": "require 与 import：从规范差异到构建工具行为",
+            "summary": "深度对比 CommonJS require 与 ES Modules import 的本质差异：静态（编译时）vs 动态（运行时）、值拷贝 vs 活绑定（Live Binding）。重点讲解 Webpack 如何利用 import 的静态结构实现 Tree Shaking，以及如何通过 __webpack_require__ 在运行时模拟 require。涵盖混用时的互操作（Interop）细节、图片等静态资源的处理方式（file-loader/url-loader/Webpack 5 Asset Modules 四种类型）。特别说明 Vite 与 Webpack 的核心差异：Webpack 是打包器会主动模拟 require，Vite 开发模式直接用浏览器原生 ESM 不打包，因此 Vite 项目里写 require 会报 ReferenceError，从 Webpack 迁移到 Vite 时需要将所有 require 改为 import，或用 @vitejs/plugin-commonjs 做兼容。",
+            "file": "knowledge/frontend-engineering/webpack-require-vs-import.md",
+            "tags": [
+              "mrn"
+            ],
+            "created_at": "2026-06-02T12:00:00+08:00",
+            "updated_at": "2026-06-02T14:30:00+08:00",
+            "revisions": 2
+          },
+          {
+            "id": "tsconfig-references-vs-extends",
+            "title": "tsconfig 的 references 与 extends：配置继承与项目引用",
+            "summary": "深度对比 TypeScript tsconfig.json 中 extends（配置继承，DRY 原则，TypeScript 2.1 引入，5.0 支持数组）与 references（项目引用，构建拆分，TypeScript 3.0 引入）的本质差异。extends 解决配置复用（类比 ESLint 共享配置），references 解决构建拆分（类比 monorepo workspace packages）。涵盖 references 的核心机制（composite 模式、增量构建、tsbuildinfo 缓存、声明文件输出）、典型 monorepo 配置模式（根 tsconfig.json 聚合 + 各包独立 tsconfig）、path alias 与 references 的配合、常见误区（references 不影响运行时模块解析、extends 不能替代 references 做增量构建），以及何时用 extends、何时用 references、何时两者都用的决策框架",
+            "file": "knowledge/frontend-engineering/tsconfig-references-vs-extends.md",
+            "created_at": "2026-06-09T00:00:00+08:00",
+            "updated_at": "2026-06-09T00:00:00+08:00",
             "revisions": 1
           }
         ]
@@ -623,7 +670,9 @@
             "title": "MRN 技术栈全景",
             "summary": "MRN 在美团三环容器体系中的定位（二环主容器），四层技术架构（容器层/框架层/跨端层/标准化层），核心包体系（@mrn/react-native、@mrn/mrn-utils、@ss/mtd-react-native 等），工程体系（Bundle/Component 概念、Talos CLI 创建、FSD 发布），性能优化体系（启动性能/运行时性能），以及新架构（Fabric + TurboModules + JSI）演进路径",
             "file": "knowledge/mrn/mrn-tech-stack-overview.md",
-            "tags": ["testing"],
+            "tags": [
+              "testing"
+            ],
             "created_at": "2026-03-26T22:00:00+08:00",
             "updated_at": "2026-03-26T22:00:00+08:00",
             "revisions": 1
@@ -633,7 +682,10 @@
             "title": "MRN AI Coding SPEC 制定计划",
             "summary": "为辅助 AI 写出符合美团 MRN 规范的代码而制定的 SPEC 行动计划。包含三阶段方法论：知识收集（官方文档+业务代码+常见坑）、SPEC 撰写（11个章节结构：项目身份/包引用/目录结构/组件/网络/路由/埋点/样式/性能/禁止事项/典型示例）、验证迭代（真实需求测试+错误补充+团队共享）。内部实践验证整体提效 40%+，首次增量代码生成率 80%~90%",
             "file": "knowledge/mrn/mrn-ai-coding-spec-plan.md",
-            "tags": ["claude-code", "methodology"],
+            "tags": [
+              "claude-code",
+              "methodology"
+            ],
             "created_at": "2026-03-26T22:00:00+08:00",
             "updated_at": "2026-03-26T22:00:00+08:00",
             "revisions": 1
@@ -643,7 +695,10 @@
             "title": "MRN 专项评分规则",
             "summary": "MRN（美团 React Native）代码库 AI 友好度专项评分细则，共 12 个检查项（MRN-1 至 MRN-12）。前 9 项为通用 RN 最佳实践（组件结构/Barrel Imports/列表性能/样式管理/平台差异/动画/自定义Hook/Feature目录/State数量），后 3 项为 MRN 特有规范（包引用规范/@mrn/react-native 替代 react-native、网络请求规范/MRNNetwork+MSI标准桥、版本区间规范）。含反模式速查表、权重建议和与通用维度的关系说明",
             "file": "knowledge/mrn/mrn-scoring-rules.md",
-            "tags": ["methodology", "ai-tools"],
+            "tags": [
+              "methodology",
+              "ai-tools"
+            ],
             "created_at": "2026-03-30T08:00:00+08:00",
             "updated_at": "2026-03-30T08:00:00+08:00",
             "revisions": 1
@@ -665,7 +720,9 @@
                 "title": "async_hooks 与 AsyncLocalStorage：Node.js 异步上下文追踪的前世今生",
                 "summary": "Node.js 异步上下文追踪技术的完整演进史：从 domain 到 cls-hooked 到 async_hooks 到 AsyncLocalStorage，核心 API 详解（asyncId/triggerAsyncId/AsyncHook）、典型应用场景（链路日志/OpenTelemetry）、性能代价分析、常见踩坑点（Worker 线程/定时器/Promise 边界），以及 TC39 AsyncContext 提案的标准化进展",
                 "file": "knowledge/backend/nodejs/async-hooks-and-asynclocalstorage.md",
-                "tags": ["frontend-engineering"],
+                "tags": [
+                  "frontend-engineering"
+                ],
                 "created_at": "2026-06-01T00:00:00+08:00",
                 "updated_at": "2026-06-01T00:00:00+08:00",
                 "revisions": 1
@@ -686,7 +743,9 @@
             "title": "JAR 包是什么：写给前端开发者",
             "summary": "面向前端/Node.js 开发者的 JAR 包完整入门指南。通过与 npm 生态的类比建立直觉（.java→.class→.jar 对应 .ts→.js→.tgz）；讲解 Java 编译链路（javac 编译生成字节码 .class、jar 命令打包）、JAR 内部结构（META-INF/MANIFEST.MF 类比 package.json）、三种用途（库 JAR/可执行 JAR/WAR）、sources JAR 的作用；澄清三大常见误区（JAR 里是字节码不是源码、JAR 不能在浏览器运行、JAR 本质是 ZIP）",
             "file": "knowledge/backend/jar-for-frontend-dev.md",
-            "tags": ["frontend-engineering"],
+            "tags": [
+              "frontend-engineering"
+            ],
             "created_at": "2026-06-02T00:00:00+08:00",
             "updated_at": "2026-06-02T00:00:00+08:00",
             "revisions": 1
@@ -696,7 +755,10 @@
             "title": "Maven：Java 世界的 npm，写给前端开发者",
             "summary": "面向有前端/Node.js 背景的开发者的 Maven 完整入门指南。通过与 npm 生态的类比建立直觉（pom.xml≈package.json、~/.m2≈node_modules全局缓存、Maven Central≈npm registry）；讲解 GAV 坐标系统、依赖 scope（compile/test/provided/runtime）、三级仓库查找顺序（本地→私服→中央）；重点解析 Maven 构建生命周期三套（default/clean/site）及 default 的七个关键阶段（validate→compile→test→package→verify→install→deploy）；传递依赖与版本冲突解决策略（最近路径优先、exclusion 排除）；插件体系（compiler/surefire/jar/spring-boot-maven-plugin）；多模块项目结构；以及四大常见坑（SNAPSHOT 不稳定/依赖冲突排查/本地仓库损坏/国内镜像配置）",
             "file": "knowledge/backend/maven-for-frontend-dev.md",
-            "tags": ["frontend-engineering", "database"],
+            "tags": [
+              "frontend-engineering",
+              "database"
+            ],
             "created_at": "2026-06-02T00:00:00+08:00",
             "updated_at": "2026-06-02T00:00:00+08:00",
             "revisions": 1
@@ -711,7 +773,10 @@
                 "title": "Spring 快速上手：写给前端/Node.js 开发者",
                 "summary": "面向熟悉 Node.js/Express 的开发者的 Spring Boot 入门指南。澄清 JVM（真正的运行时）与 Spring Framework（应用框架）的区别；展开解释 Spring Framework 的五大核心能力：IoC 容器（对象工厂/依赖注入）、AOP（横切关注点/类比 Express 中间件但更强大）、事务管理（@Transactional 替代手写 BEGIN/COMMIT/ROLLBACK）、Spring MVC（HTTP 路由）、数据访问抽象；项目结构与 Node.js 对照；Spring Boot 启动与配置（application.yml/@Value/@ConfigurationProperties/Starter 机制）；Spring MVC 接口开发（@RestController/@GetMapping/@PostMapping/@PathVariable/@RequestParam/@RequestBody/全局异常处理）；Spring Data JPA（@Entity/Repository 接口/方法名查询/自定义 @Query）；@Transactional 事务基础用法与核心坑；与 Node.js 的思维差异（同步阻塞/强类型/注解驱动）",
                 "file": "knowledge/backend/spring/spring-quickstart-for-frontend-dev.md",
-                "tags": ["frontend-engineering", "database"],
+                "tags": [
+                  "frontend-engineering",
+                  "database"
+                ],
                 "created_at": "2026-05-29T00:00:00+08:00",
                 "updated_at": "2026-05-29T10:00:00+08:00",
                 "revisions": 2
@@ -721,7 +786,9 @@
                 "title": "Spring 核心机制与高阶特性深度解析",
                 "summary": "Spring Boot 自动配置原理（@ConditionalOnClass/条件注解/用户配置优先级）、AOP 面向切面编程（切面/切点/通知/环绕通知/自定义注解+AOP 权限控制/同类内部调用失效问题）、事务传播行为七种类型详解（REQUIRED/REQUIRES_NEW/NESTED 等）、事务高频踩坑（Checked Exception 不回滚/懒加载陷阱/LazyInitializationException）、Spring Data JPA 进阶（N+1 查询问题与 JOIN FETCH 解决方案/分页查询/DTO 投影）、Spring Security（JWT 过滤器/方法级权限 @PreAuthorize）、Spring Cache 声明式缓存（@Cacheable/@CacheEvict/@CachePut/无缝切换 Redis）、Spring Actuator 生产监控端点、Spring Cloud 微服务工具集（Nacos/OpenFeign/Resilience4j 熔断器/Gateway）、Bean 作用域与生命周期钩子",
                 "file": "knowledge/backend/spring/spring-core-and-advanced-features.md",
-                "tags": ["database"],
+                "tags": [
+                  "database"
+                ],
                 "created_at": "2026-05-29T00:00:00+08:00",
                 "updated_at": "2026-05-29T00:00:00+08:00",
                 "revisions": 1
