@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-06-09T19:30:00+08:00",
+  "updated_at": "2026-06-11T10:16:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -652,10 +652,10 @@
           {
             "id": "tsconfig-references-vs-extends",
             "title": "tsconfig 的 references 与 extends：配置继承与项目引用",
-            "summary": "深度对比 TypeScript tsconfig.json 中 extends（配置继承，DRY 原则，TypeScript 2.1 引入，5.0 支持数组）与 references（项目引用，构建拆分，TypeScript 3.0 引入）的本质差异。extends 解决配置复用（类比 ESLint 共享配置），references 解决构建拆分（类比 monorepo workspace packages）。涵盖 references 的核心机制（composite 模式、增量构建、tsbuildinfo 缓存、声明文件输出）、典型 monorepo 配置模式（根 tsconfig.json 聚合 + 各包独立 tsconfig）、path alias 与 references 的配合、常见误区（references 不影响运行时模块解析、extends 不能替代 references 做增量构建），以及何时用 extends、何时用 references、何时两者都用的决策框架",
+            "summary": "深度对比 tsconfig.json 中 extends（配置继承/DRY）与 references（文件管辖划分）的本质区别。extends 解决配置复用（TS 2.1 引入，5.0 支持数组多继承），覆盖规则（compilerOptions 逐字段浅覆盖、files/include/exclude 完全替换、references 不被继承）；references 的本质是告诉编译器和 IDE「某些文件不归我管，归另一个 tsconfig 管」，粒度是文件而非包（Vite 的 tsconfig.node.json 是最典型例子：同一项目中 vite.config.ts 归 Node 配置管、src/ 归浏览器配置管）。monorepo 跨包增量编译（composite + tsc --build）是 references 的高级用法而非本质定义。含四个常见误解澄清",
             "file": "knowledge/frontend-engineering/tsconfig-references-vs-extends.md",
-            "created_at": "2026-06-09T00:00:00+08:00",
-            "updated_at": "2026-06-09T00:00:00+08:00",
+            "created_at": "2026-06-09T19:37:00+08:00",
+            "updated_at": "2026-06-09T19:37:00+08:00",
             "revisions": 1
           }
         ]
@@ -761,6 +761,16 @@
             ],
             "created_at": "2026-06-02T00:00:00+08:00",
             "updated_at": "2026-06-02T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "thrift-guide",
+            "title": "Apache Thrift 入门指南",
+            "summary": "Apache Thrift 跨语言 RPC 框架完整入门。涵盖历史（Facebook 2007→Apache TLP 2010）、四层架构（Transport/Protocol/Processor/Server）、IDL 语法全解（基本类型/容器/struct/enum/service/字段编号与兼容性）、安装与代码生成、美团公司级基建（MTthrift/OCTO 服务治理/MDP Starter/注解方式 vs IDL 方式）、Thrift vs JSON 性能与设计优势对比、Thrift vs Protobuf 选型、代码仓库中 Thrift 相关文件识别（.thrift 文件/生成代码/服务实现/客户端引用/Maven 依赖）、常见坑（字段编号不可改/不支持 Java 富类型/Null 值处理/required 的代价/统一协议）",
+            "file": "knowledge/backend/thrift-guide.md",
+            "tags": ["os-network"],
+            "created_at": "2026-06-11T10:16:00+08:00",
+            "updated_at": "2026-06-11T10:16:00+08:00",
             "revisions": 1
           },
           {

@@ -2,9 +2,7 @@
 
 ## 它们解决的是两个完全不同的问题
 
-`extends` 和 `references` 都出现在 tsconfig.json 的顶层字段中，也都涉及"多个 tsconfig 之间的关系"，但它们解决的问题截然不同。一句话概括：`extends` 是**配置复用**（DRY 原则），`references` 是**构建拆分**（分治原则）。
-
-如果你用 Node.js 做类比：`extends` 相当于把公共的 ESLint 配置抽成 `@company/eslint-config-base` 让各项目继承；`references` 则相当于把一个巨型仓库拆成多个 workspace packages，各自独立构建、通过声明依赖关系协同。
+`extends` 和 `references` 都出现在 tsconfig.json 的顶层字段中，也都涉及"多个 tsconfig 之间的关系"，但它们解决的问题截然不同。一句话概括：`extends` 是**配置复用**（DRY 原则），`references` 是**文件管辖划分**（让不同文件归不同 tsconfig 管）。
 
 ---
 
@@ -50,7 +48,7 @@ TypeScript 2.1（2016 年）引入，TypeScript 5.0（2023 年）扩展为支持
 
 而 `files`、`include`、`exclude` 这三个顶层字段的行为更直接：子配置中一旦出现，就**完全替换**基础配置中的对应字段，不做任何合并。
 
-另一个需要记住的规则是：**`references` 字段不会被继承**。即使基础配置里写了 `references`，子配置也不会拿到——这是刻意设计，因为项目引用关系是每个项目自身的结构性声明，不应该被"默默继承"。
+另一个需要记住的规则是：**`references` 字段不会被继承**。即使基础配置里写了 `references`，子配置也不会拿到——这是刻意设计，因为引用关系是每个配置自身的结构性声明，不应该被"默默继承"。
 
 ### TypeScript 5.0 的数组 extends
 
@@ -73,80 +71,79 @@ TypeScript 2.1（2016 年）引入，TypeScript 5.0（2023 年）扩展为支持
 
 ### 典型使用场景
 
-`extends` 的使用场景可以总结为：当你有多个 tsconfig 需要**共享相同的编译器配置**时。比如 monorepo 中所有子包共享严格模式和模块策略，或者测试配置继承主配置但额外加上 `types: ["jest"]`。
+当你有多个 tsconfig 需要**共享相同的编译器配置**时。比如 monorepo 中所有子包共享严格模式和模块策略，或者测试配置继承主配置但额外加上 `types: ["jest"]`。
 
 ---
 
-## references：项目引用
+## references：项目引用（文件管辖划分）
 
 ### 引入时间
 
-TypeScript 3.0（2018 年）引入，与 `--build` 模式和 `composite` 选项配套使用。
+TypeScript 3.0（2018 年）引入。
 
-### 解决什么问题
+### 本质：告诉编译器和 IDE "某些文件不归我管，归另一个 tsconfig 管"
 
-想象一个 monorepo 中有 `packages/core`、`packages/utils`、`packages/app` 三个包，`app` 依赖 `core`，`core` 依赖 `utils`。在没有 `references` 之前，你只有两个选择：要么用一个巨大的 tsconfig 把所有文件一起编译（改一行代码就全量重编），要么各自独立编译但丧失跨包的类型检查能力。
+references 最核心的作用是**划分文件的管辖权**。一个主 tsconfig 通过 `"references": [{ "path": "./tsconfig.node.json" }]` 声明了一个子配置，相当于说："某些文件不归我管，归这个子配置管。"
 
-`references` 让你声明包与包之间的依赖拓扑，然后 `tsc --build` 会：按拓扑顺序编译（先 utils → 再 core → 最后 app），对未变更的包跳过编译（增量构建），并且在类型层面正确地跨包解析。
+这样，TypeScript 编译器和 IDE（VS Code 的 tsserver）就知道各自 `include` 的文件由各自的配置检查，两者互不干扰。如果不靠 references 做显式声明，IDE 只能通过"就近匹配"猜哪个 tsconfig 该管哪个文件，行为不稳定。
 
-### 核心配置
+**粒度是文件，不是包。** 这一点至关重要。references 不是"包对包"的依赖声明，而是"配置对文件"的管辖声明。同一个目录下的不同文件，完全可以归不同的 tsconfig 管。
 
-项目引用需要两侧配合：
+### 最典型的例子：Vite 项目
 
-**被引用的项目**必须开启 `composite: true`：
-
-```jsonc
-// packages/utils/tsconfig.json
-{
-  "compilerOptions": {
-    "composite": true,       // 必须
-    "declaration": true,     // composite 自动隐含
-    "declarationMap": true,  // 推荐，支持跳转到源码
-    "outDir": "./dist"
-  },
-  "include": ["src"]
-}
-```
-
-`composite: true` 做了几件事：强制开启 `declaration`（必须产出 .d.ts），强制所有源文件必须被 `include` 或 `files` 覆盖（不能有"漏网之鱼"），开启 `incremental`（产出 .tsbuildinfo 文件用于增量判断）。
-
-**引用方**在自己的 tsconfig 中声明依赖：
+Vite 创建的 TypeScript 项目会生成这样的结构：
 
 ```jsonc
-// packages/app/tsconfig.json
+// tsconfig.json — 主配置，自己不管任何文件，只做分发
 {
-  "compilerOptions": {
-    "outDir": "./dist"
-  },
+  "files": [],
   "references": [
-    { "path": "../core" },
-    { "path": "../utils" }
-  ],
-  "include": ["src"]
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }
 ```
 
-### tsc --build 模式
-
-配好 references 后，编译命令从 `tsc` 变为 `tsc --build`（简写 `tsc -b`）。这个模式下编译器会：
-
-1. 解析整个引用图，计算拓扑排序
-2. 检查每个项目的 `.tsbuildinfo` 文件，判断是否需要重编
-3. 只重编有变化的项目及其下游依赖
-4. 编译完一个项目后，下游项目通过其 `.d.ts` 文件获取类型信息
-
-这就是为什么大型 monorepo 使用 references 后构建速度能大幅提升——改了 `utils` 里一个函数，只需要重编 `utils` → `core`（如果 core 用了那个函数）→ `app`（如果 app 用了 core 受影响的部分），而不是全量编译。
-
-### 隔离性保证
-
-references 带来一个重要的副作用：**源文件隔离**。被引用的项目对引用方来说是"不透明的"——引用方只能看到被引用项目产出的 `.d.ts` 声明文件，看不到源码。这意味着如果 `app` 中的某个文件试图 `import` `utils` 的内部实现细节（没有通过 `utils` 的公共 API 导出），编译器会报错。这是刻意的设计，用于强制模块边界。
-
-### 根级 tsconfig 的 references
-
-通常在 monorepo 根目录会放一个"总控"tsconfig：
+```jsonc
+// tsconfig.app.json — 管浏览器环境的文件
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
+```
 
 ```jsonc
-// tsconfig.json（仓库根目录）
+// tsconfig.node.json — 管 Node.js 环境的文件
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"]
+  },
+  "include": ["vite.config.ts", "vitest.config.ts"]
+}
+```
+
+这里的逻辑很清楚：`vite.config.ts` 运行在 Node.js 环境，需要 Node 类型定义、不需要 DOM；`src/` 下的业务代码运行在浏览器，需要 DOM、不需要 Node。它们是同一个项目里的文件，但需要不同的类型环境。references 让 IDE 精确知道哪个文件归哪个配置管。
+
+### 如果不用 references 会怎样
+
+假设你在根 tsconfig 里同时 `include` 了 `src/` 和 `vite.config.ts`，并且 `lib` 里同时包含 `DOM` 和 Node 类型。表面上"能用"，但实际上：`src/` 下的代码能访问 `process`、`__dirname` 等 Node 全局变量而不报错，`vite.config.ts` 里也能写 `document.querySelector` 而不报错——类型隔离完全失效，IDE 的检查形同虚设。
+
+### 扩展场景：monorepo 跨包
+
+references 在 monorepo 中也能发挥作用，此时每个包有自己的 tsconfig，根配置通过 references 列出所有子包。配合 `composite: true` 和 `tsc --build` 可以实现按依赖拓扑的增量编译。但这是 references 的**高级用法**，不是它的本质定义。
+
+```jsonc
+// monorepo 根 tsconfig.json
 {
   "files": [],
   "references": [
@@ -157,87 +154,58 @@ references 带来一个重要的副作用：**源文件隔离**。被引用的�
 }
 ```
 
-`files: []` 意味着这个 tsconfig 自身不编译任何文件，它的唯一作用是声明"这个仓库由哪些子项目构成"。然后在根目录执行 `tsc --build` 就会按顺序编译所有子项目。
+在这个场景中，被引用的子项目需要 `composite: true`，它会：强制开启 `declaration`（产出 .d.ts），强制所有源文件必须被 `include` 覆盖，开启 `incremental`（产出 .tsbuildinfo 用于增量判断）。然后 `tsc --build` 能按拓扑顺序只重编有变化的子项目。
+
+但即使你不用 `tsc --build`（比如用 Vite 做打包、只在 CI 跑 `tsc --noEmit` 做类型检查），references 对 IDE 的类型解析和跳转体验仍然有价值。
+
+### composite 不是必须的
+
+在 Vite 那个例子中，`tsconfig.node.json` 和 `tsconfig.app.json` 并不需要设置 `composite: true`。`composite` 只在你需要 `tsc --build` 做增量编译时才是必须的。如果你只是为了让 IDE 正确地把文件分配给不同配置，references 本身就够了。
 
 ---
 
 ## 核心区别对照
 
-从以下几个维度理解它们的本质差异：
+**解决的问题**。`extends` 解决"配置写得重复"，`references` 解决"哪个文件该用哪套配置"。
 
-**作用方向**。`extends` 是纵向的"继承"：子 tsconfig 从父 tsconfig 拿到默认值。`references` 是横向的"依赖"：项目 A 声明它在编译时依赖项目 B 的产出。
+**作用方向**。`extends` 是纵向的"继承"：子配置从父配置拿到默认值。`references` 是横向的"分治"：主配置把文件的管辖权分发给多个子配置。
 
-**影响范围**。`extends` 只影响编译器选项的默认值，不改变编译行为本身。`references` 改变了整个编译模型——从"一次性全量编译"变成"按依赖图增量编译"。
+**对 IDE 的意义**。`extends` 对 IDE 行为无直接影响（只是配置值不同）。`references` 直接决定了 IDE 用哪个配置来分析某个文件——这决定了你能看到什么类型、报什么错。
 
-**是否可以单独使用**。`extends` 可以独立使用，一个简单的单体项目继承 `@tsconfig/node20` 是再正常不过的事。`references` 则必须配合 `composite: true` 和 `tsc --build` 才有意义。
-
-**编译时的关系**。使用 `extends` 时，最终只有一个"生效的配置"被送给编译器。使用 `references` 时，每个子项目保留自己独立的 tsconfig，编译器会多次执行，每次针对一个子项目。
+**是否涉及编译**。`extends` 纯粹是配置层面的事，不改变编译行为。`references` 配合 `composite` + `tsc --build` 时能实现增量编译，但不用 `tsc --build` 时它仍然对 IDE 有效。
 
 ---
 
 ## 实际项目中如何配合使用
 
-在真实的 monorepo 中，`extends` 和 `references` 几乎总是一起出现。原因很简单：你既需要 references 来做增量构建和模块隔离，又不想在每个子包的 tsconfig 里重复写一遍 `strict: true`、`moduleResolution: "bundler"` 等公共配置。
-
-典型的目录结构和配置关系：
+在真实项目中，`extends` 和 `references` 经常一起出现。一个典型的 Vite + monorepo 项目：
 
 ```
 monorepo/
-├── tsconfig.base.json          ← 公共编译选项
-├── tsconfig.json               ← 总控文件，只有 references
+├── tsconfig.base.json          ← 公共编译选项（extends 的目标）
+├── tsconfig.json               ← 总控，files: []，只做 references 分发
 ├── packages/
 │   ├── utils/
-│   │   └── tsconfig.json       ← extends base + composite: true
-│   ├── core/
-│   │   └── tsconfig.json       ← extends base + composite: true + references utils
+│   │   └── tsconfig.json       ← extends base，管自己的 src/
 │   └── app/
-│       └── tsconfig.json       ← extends base + references core, utils
+│       ├── tsconfig.json       ← 总控，references app 和 node
+│       ├── tsconfig.app.json   ← extends base，管 src/（浏览器）
+│       └── tsconfig.node.json  ← extends base，管 vite.config.ts（Node）
 ```
 
-```jsonc
-// tsconfig.base.json
-{
-  "compilerOptions": {
-    "strict": true,
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  }
-}
-```
-
-```jsonc
-// packages/core/tsconfig.json
-{
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "composite": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
-  },
-  "references": [
-    { "path": "../utils" }
-  ],
-  "include": ["src"]
-}
-```
-
-这样，`extends` 负责消除配置重复，`references` 负责定义编译顺序和模块边界，各司其职。
+`extends` 负责让各子配置不用重复写 `strict: true`、`moduleResolution` 等公共选项；`references` 负责划分文件的管辖归属，确保 IDE 对每个文件使用正确的类型环境。
 
 ---
 
 ## 常见误解澄清
 
-**误解一："references 会让被引用项目的配置继承过来"**。不会。references 纯粹是构建依赖声明，不涉及任何配置合并。两个通过 references 关联的项目，compilerOptions 可以完全不同。
+**误解一："references 的粒度是包"**。不是。references 的粒度是文件。一个单体项目里的 `vite.config.ts` 和 `src/main.ts` 就可以归不同的 tsconfig 管。monorepo 跨包只是 references 的一种应用场景，不是它的定义。
 
-**误解二："用了 extends 就不需要 references"**。extends 只是让你少写几行配置，不解决增量编译和模块隔离的问题。如果你的 monorepo 全量编译要 2 分钟，加 extends 还是 2 分钟；加 references 可能变成 10 秒。
+**误解二："references 只有配合 tsc --build 才有用"**。不是。即使你完全不用 tsc 编译（比如用 Vite/esbuild 做转译），references 对 IDE 仍然有效——它告诉 tsserver 用哪个配置分析哪个文件。
 
-**误解三："references 中的 path 指向 ts 源文件目录"**。path 指向的是一个包含 tsconfig.json 的目录（或直接指向一个 tsconfig 文件）。编译器会读取那个 tsconfig，以它定义的范围为一个"项目单元"。
+**误解三："references 会让被引用配置的选项继承过来"**。不会。references 纯粹是管辖权声明，不涉及任何配置合并。两个通过 references 关联的配置，compilerOptions 可以完全不同（这正是它的设计目的）。
+
+**误解四："用了 extends 就不需要 references"**。extends 解决"配置写得重复"，references 解决"文件该归谁管"。它们是正交的两个维度。
 
 ---
 
@@ -247,4 +215,5 @@ monorepo/
 - [TypeScript 官方文档 - Project References](https://www.typescriptlang.org/docs/handbook/project-references.html)
 - [TypeScript 官方文档 - composite](https://www.typescriptlang.org/tsconfig/composite.html)
 - [TypeScript 5.0 Release Notes - extends 数组支持](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/)
-- [@tsconfig/bases - 社区共享配置集合](https://github.com/tsconfig/bases)
+- [探究 tsconfig.node.json 文件和 references 字段的作用](https://juejin.cn/post/7126043888573218823)
+- [Why does Vite create multiple TypeScript config files](https://www.geeksforgeeks.org/typescript/why-does-vite-create-multiple-typescript-config-files-tsconfigjson-tsconfigappjson-and-tsconfignodejson/)
