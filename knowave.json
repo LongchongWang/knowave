@@ -2,7 +2,7 @@
   "version": "1.0",
   "root": "/Users/wanglongchong/Documents/knowave",
   "created_at": "2026-03-23T10:00:00+08:00",
-  "updated_at": "2026-06-11T10:16:00+08:00",
+  "updated_at": "2026-06-24T00:00:00+08:00",
   "tree": {
     "id": "root",
     "title": "知识库",
@@ -607,6 +607,16 @@
             "file": "knowledge/database/mybatis-core-features-and-advanced.md",
             "created_at": "2026-05-28T00:00:00+08:00",
             "updated_at": "2026-05-28T00:00:00+08:00",
+            "revisions": 1
+          },
+          {
+            "id": "binlog-and-cdc",
+            "title": "Binlog 与 CDC：MySQL 增量数据同步的底层逻辑",
+            "summary": "从 MySQL Binlog 的底层机制（三种格式 STATEMENT/ROW/MIXED、事件结构、主从复制协议）讲起，延伸到基于 Binlog 的 CDC 工具生态：Java 底层库 mysql-binlog-connector-java、Canal（阿里巴巴开源，伪装从库解析 Binlog）、Debezium（Red Hat 开源，Kafka Connect Source Connector）、DTS（云厂商托管方案，含数据迁移/同步/订阅三大能力），以及 Maxwell、Flink CDC 等工具的对比与选型",
+            "file": "knowledge/database/binlog-and-cdc.md",
+            "tags": ["backend"],
+            "created_at": "2026-06-24T00:00:00+08:00",
+            "updated_at": "2026-06-24T00:00:00+08:00",
             "revisions": 1
           }
         ]
